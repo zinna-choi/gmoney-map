@@ -4,7 +4,12 @@ import StoreCard from "./StoreCard";
 type Props = {};
 
 const StoreList: React.FC<Props> = (props) => {
-  return <StoreCard />;
+  return (
+    <div>
+      <StoreCard />
+      <StoreCard />
+    </div>
+  );
 };
 
 export default StoreList;
