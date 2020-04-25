@@ -7,7 +7,6 @@ const StoreList: React.FC<Props> = (props) => {
   return (
     <div>
       <StoreCard />
-      <StoreCard />
     </div>
   );
 };
