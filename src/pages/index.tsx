@@ -4,6 +4,8 @@ import Side from "../components/layouts/Side";
 import MapView from "../components/maps/MapView";
 import StorePop from "../components/store/StorePop";
 import { Button } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { RootState } from "../module";
 
 type Props = {
   className?: string;
@@ -11,15 +13,14 @@ type Props = {
 
 const Home: React.FC<Props> = (props) => {
   const [map, setMap] = useState(false);
+  const { shopStore } = useSelector((state: RootState) => state.global);
   return (
     <LayoutStyeld>
       <MapView />
       <div className="view">
         <Side />
       </div>
-      <div className="pop">
-        <StorePop />
-      </div>
+      <div className="pop">{shopStore && <StorePop />}</div>
     </LayoutStyeld>
   );
 };

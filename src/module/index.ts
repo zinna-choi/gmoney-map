@@ -1,6 +1,13 @@
 import { combineReducers, createStore } from "redux";
+import global, { GlobalState } from "./global";
 
-const rootReducer = combineReducers({});
+export type RootState = {
+  global: GlobalState;
+};
+
+const rootReducer = combineReducers({
+  global,
+});
 
 const store = createStore(rootReducer);
 

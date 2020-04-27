@@ -1,6 +1,8 @@
 // import App from 'next/app'
 import "../style.css";
 import { useEffect } from "react";
+import { Provider as ReduxProvider } from "react-redux";
+import store from "../module";
 
 function MyApp({ Component, pageProps }: any) {
   useEffect(() => {
@@ -9,7 +11,13 @@ function MyApp({ Component, pageProps }: any) {
       jssStyles.parentNode.removeChild(jssStyles);
   }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <ReduxProvider store={store}>
+        <Component {...pageProps} />
+      </ReduxProvider>
+    </>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for

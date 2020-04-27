@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Bedge from "../common/Bedge";
 import styled from "styled-components";
 
-type Props = {};
+type Props = {
+  onClick?: () => void;
+};
 
 const StoreCard: React.FC<Props> = (props) => {
   return (
-    <LayoutStyled>
+    <LayoutStyled onClick={props.onClick}>
       <Bedge index={1}></Bedge>
       <StoreInfo>
         <div className="detail">
