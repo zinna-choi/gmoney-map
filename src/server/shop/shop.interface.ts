@@ -6,7 +6,8 @@ export interface IShop extends GmoneyApiInterface {
     type: "Point";
     coordinates: number[];
   };
-  distance: number;
 }
 
-export interface IShopDocument extends Document, IShop {}
+export interface IShopDocument extends Document, IShop {
+  distance: number;
+}
