@@ -1,14 +1,16 @@
+require("dotenv").config();
 module.exports = {
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
     "!**/node_modules/**",
   ],
-  setupFilesAfterEnv: ["<rootDir>/setupTests.js"],
+  setupFilesAfterEnv: ["<rootDir>/.jest/setupTests.js"],
+  setupFiles: ["<rootDir>/.jest/setEnvVars.js"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+    "^.+\\.css$": "<rootDir>/.jest/cssTransform.js",
   },
   transformIgnorePatterns: [
     "/node_modules/",
