@@ -1,15 +1,15 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import styled from "styled-components";
 
 type Props = {
   className?: string;
   title?: string;
   icon?: any;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const RoundButton: React.FC<Props> = (props) => {
   return (
-    <ButtonStyled className={`${props.className}`}>
+    <ButtonStyled className={`${props.className}`} {...props}>
       {props.title}
       {props.icon}
     </ButtonStyled>
