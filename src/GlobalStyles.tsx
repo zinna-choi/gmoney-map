@@ -31,6 +31,7 @@ html, body, #root {
 a{ 
   text-decoration:none
 }
+
 `;
 
 export default GlobalStyles;

@@ -7,6 +7,7 @@ import { IoMdCafe, IoIosMedkit } from "react-icons/io";
 import { MdShoppingBasket, MdMovieCreation } from "react-icons/md";
 import { FaStore, FaHamburger } from "react-icons/fa";
 import StoreList from "../store/StoreList";
+import media from "../../lib/styles/media";
 
 type Props = {};
 
@@ -83,6 +84,9 @@ const LayoutStyled = styled.div`
   z-index: 999;
   box-shadow: 1px 1px 22px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  ${media.small} {
+    display: none;
+  }
 `;
 const Content = styled.div`
   padding: 3%;
@@ -112,7 +116,7 @@ const FranLayout = styled.div`
   justify-content: space-between;
   .btn_con {
     width: 30%;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-align: center;
   }
   p {

@@ -17,7 +17,7 @@ const MapView: React.FC = (props) => {
 
   return (
     <Layout>
-      <div className="view">
+      <div className="Mapview">
         <div id="map" style={{ width: "100vw", height: "100vh" }} />
       </div>
     </Layout>
@@ -25,6 +25,8 @@ const MapView: React.FC = (props) => {
 };
 
 const Layout = styled.div`
+  width: 100%;
+  height: 100%;
   position: absolute;
   z-index: 0;
 `;

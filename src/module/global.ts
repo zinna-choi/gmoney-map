@@ -1,19 +1,19 @@
 import produce from "immer";
 import { createStandardAction } from "typesafe-actions";
 import { createReducer } from "../lib/createReducer";
+//액션타입
 
 const SHOP_POP_STORE = "global/FETCH_SHOP";
 
 // 액션
 export const shopPopStore = createStandardAction(SHOP_POP_STORE)<boolean>();
-
-// 액션 타입
+//액션타입
 export type ShopPopStore = ReturnType<typeof shopPopStore>;
-
+// typescript 로 state 타입 참조
 export type GlobalState = {
   shopStore: boolean;
 };
-
+// 기본적으로 state 에다 저장 할 데이터
 const initialState: GlobalState = {
   shopStore: false,
 };
