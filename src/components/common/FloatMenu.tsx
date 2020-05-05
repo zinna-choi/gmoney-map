@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import media from "../../lib/styles/media";
 
 type Props = {};
 
 const FloatMenu: React.FC<Props> = (props) => {
+  const [state, setState] = useState({ visible: false });
+  const handleClick = () => {
+    setState({ visible: !state.visible });
+  };
   return (
-    <LayoutStyled>
-      <Content>
-        <div className="store">
-          주변음식점 <span>4</span> 개
-        </div>
-        <div>|</div>
-        <div>리스트로보기 ></div>
-      </Content>
-    </LayoutStyled>
+    <>
+      <LayoutStyled>
+        <Content>
+          <div className="store">
+            주변음식점 <span>4</span> 개
+          </div>
+          <div>|</div>
+          <div onClick={handleClick}>리스트로보기 ></div>
+        </Content>
+      </LayoutStyled>
+    </>
   );
 };
 

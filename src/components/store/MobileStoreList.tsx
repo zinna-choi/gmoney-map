@@ -1,26 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import StorePop from "./StorePop";
 import media from "../../lib/styles/media";
 
-type Props = {};
+export type Props = {
+  visible?: boolean;
+};
 
 const MobileStoreList: React.FC<Props> = (props) => {
+  const [state, setState] = useState({ visible: false });
+  const handleClick = () => {
+    setState({ visible: !state.visible });
+    console.log(setState);
+  };
   return (
-    <LayoutStyled>
-      <SubLayout>
-        <div className="store">
-          주변음식점 <span>4</span> 개
-        </div>
-        <div>맵으로보기 ></div>
-      </SubLayout>
-      <List></List>
-    </LayoutStyled>
+    <>
+      {state.visible ? (
+        <LayoutStyled>
+          <SubLayout>
+            <div className="store">
+              주변음식점 <span>4</span> 개
+            </div>
+            <div onClick={handleClick}>맵으로보기 ></div>
+          </SubLayout>
+          <List></List>
+        </LayoutStyled>
+      ) : null}
+    </>
   );
 };
 
 const LayoutStyled = styled.div`
-  display: none;
   width: 100%;
   position: absolute;
   z-index: 200;

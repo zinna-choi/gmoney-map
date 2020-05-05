@@ -49,7 +49,11 @@ const LayoutStyled = styled.div`
   box-sizing: border-box;
   justify-content: space-between;
   .mobilebtn {
-    display: flex;
+    display: none;
+    ${media.small} {
+      display: block;
+      display: flex;
+    }
   }
 `;
 
