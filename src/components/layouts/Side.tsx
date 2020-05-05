@@ -8,10 +8,13 @@ import { MdShoppingBasket, MdMovieCreation } from "react-icons/md";
 import { FaStore, FaHamburger } from "react-icons/fa";
 import StoreList from "../store/StoreList";
 import media from "../../lib/styles/media";
+import { withRouter, useRouter } from "next/router";
+import Link from "../../lib/utility/ActiveLink";
 
 type Props = {};
 
 const Side: React.FC<Props> = (props) => {
+  const router = useRouter();
   return (
     <LayoutStyled>
       <Header />
@@ -25,42 +28,66 @@ const Side: React.FC<Props> = (props) => {
           <p>주변탐색</p>
         </div>
         <FranLayout>
-          <div className="btn_con">
-            <CircleButton>
-              <FaHamburger size="20" color="white" />
-            </CircleButton>
-            <p>음식점</p>
-          </div>
-          <div className="btn_con">
-            <CircleButton>
-              <IoMdCafe size="20" color="white" />
-            </CircleButton>
-            <p>카페</p>
-          </div>
-          <div className="btn_con">
-            <CircleButton>
-              <FaStore size="20" color="white" />
-            </CircleButton>
-            <p>생활편의</p>
-          </div>
-          <div className="btn_con">
-            <CircleButton>
-              <MdShoppingBasket size="20" color="white" />
-            </CircleButton>
-            <p>마트/편의점</p>
-          </div>
-          <div className="btn_con">
-            <CircleButton>
-              <IoIosMedkit size="20" color="white" />
-            </CircleButton>
-            <p>병원/약국</p>
-          </div>
-          <div className="btn_con">
-            <CircleButton>
-              <MdMovieCreation size="20" color="white" />
-            </CircleButton>
-            <p>문화/교육</p>
-          </div>
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "1" } }}>
+              <a className="btn_con">
+                <CircleButton>
+                  <FaHamburger size="20" color="#fff" />
+                </CircleButton>
+                <p>음식점</p>
+              </a>
+            </Link>
+          </Tab>
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "2" } }}>
+              <a className="btn_con">
+                <CircleButton>
+                  <IoMdCafe size="20" color="#fff" />
+                </CircleButton>
+                <p>카페</p>
+              </a>
+            </Link>
+          </Tab>
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "3" } }}>
+              <a className="btn_con">
+                <CircleButton>
+                  <FaStore size="20" color="#fff" />
+                </CircleButton>
+                <p>생활편의</p>
+              </a>
+            </Link>
+          </Tab>
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "4" } }}>
+              <a className="btn_con">
+                <CircleButton>
+                  <MdShoppingBasket size="20" color="#fff" />
+                </CircleButton>
+                <p>마트/편의점</p>
+              </a>
+            </Link>
+          </Tab>
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "5" } }}>
+              <a className="btn_con">
+                <CircleButton>
+                  <IoIosMedkit size="20" color="#fff" />
+                </CircleButton>
+                <p>병원/약국</p>
+              </a>
+            </Link>
+          </Tab>
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "6" } }}>
+              <a className="btn_con">
+                <CircleButton>
+                  <MdMovieCreation size="20" color="#fff" />
+                </CircleButton>
+                <p>문화/교육</p>
+              </a>
+            </Link>
+          </Tab>
         </FranLayout>
       </Content>
       <hr />
@@ -134,6 +161,11 @@ const CircleButton = styled.button`
   background: linear-gradient(133.04deg, #005dac 3.19%, #10b592 100%);
   border: none;
   color: #fff;
+`;
+const Tab = styled.div`
+  width: 30%;
+  text-align: center;
+  margin-bottom: 0.5rem;
 `;
 
 export default Side;

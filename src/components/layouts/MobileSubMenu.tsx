@@ -16,7 +16,10 @@ export type Props = {
 
 const MobileSubMenu: React.FC<Props> = (porps) => {
   const router = useRouter();
-  const handleClick = (e: any) => {};
+  const handleClick = (e: any) => {
+    e.currentTarget.style.background =
+      "linear-gradient(133.04deg, #005dac 3.19%, #10b592 100%)";
+  };
 
   return (
     <LayoutStyled>
@@ -27,7 +30,7 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
       <Content>
         <FranLayout>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href="/">
+            <Link activeClassName="active" href={{ query: { cate: "1" } }}>
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <FaHamburger size="20" color="#fff" />
@@ -36,8 +39,8 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
               </a>
             </Link>
           </Tab>
-          <Tab className={router.pathname == "/2" ? "active" : ""}>
-            <Link activeClassName="active" href="/2">
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "2" } }}>
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <IoMdCafe size="20" color="#fff" />
@@ -46,8 +49,8 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
               </a>
             </Link>
           </Tab>
-          <Tab className={router.pathname == "/3" ? "active" : ""}>
-            <Link activeClassName="active" href="/2">
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "3" } }}>
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <FaStore size="20" color="#fff" />
@@ -56,8 +59,8 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
               </a>
             </Link>
           </Tab>
-          <Tab className={router.pathname == "/4" ? "active" : ""}>
-            <Link activeClassName="active" href="/4">
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "4" } }}>
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <MdShoppingBasket size="20" color="#fff" /> <p>마트/편의점</p>
@@ -65,8 +68,8 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
               </a>
             </Link>
           </Tab>
-          <Tab className={router.pathname == "/5" ? "active" : ""}>
-            <Link activeClassName="active" href="/5">
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "5" } }}>
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <IoIosMedkit size="20" color="#fff" /> <p>병원/약국</p>
@@ -74,8 +77,8 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
               </a>
             </Link>
           </Tab>
-          <Tab className={router.pathname == "/6" ? "active" : ""}>
-            <Link activeClassName="active" href="/6">
+          <Tab className={router.pathname == "/" ? "active" : ""}>
+            <Link activeClassName="active" href={{ query: { cate: "6" } }}>
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <MdMovieCreation size="20" color="#fff" /> <p>문화/교육</p>
@@ -99,12 +102,6 @@ const LayoutStyled = styled.div`
   left: 0;
   ${media.small} {
     display: block;
-  }
-  .active {
-    background: "linear-gradient(133.04deg, #005dac 3.19%, #10b592 100%)";
-  }
-  .active:after {
-    background: "linear-gradient(133.04deg, #005dac 3.19%, #10b592 100%)";
   }
   .loca-info {
     padding: 3%;
@@ -154,7 +151,7 @@ const CircleButton = styled.button`
   width: 90px;
   height: 45px;
   border-radius: 30px;
-  background: #ccc;
+  background: #4e799e;
   border: none;
   color: #fff;
   display: flex;
@@ -162,6 +159,11 @@ const CircleButton = styled.button`
   margin-right: 5px;
 `;
 
-const Tab = styled.div``;
+const Tab = styled.div`
+  .active {
+    color: red;
+    background: "linear-gradient(133.04deg, #005dac 3.19%, #10b592 100%)";
+  }
+`;
 
 export default withRouter(MobileSubMenu);
