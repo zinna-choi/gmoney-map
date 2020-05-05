@@ -16,9 +16,10 @@ export type Props = {
 
 const MobileSubMenu: React.FC<Props> = (porps) => {
   const router = useRouter();
+  const { cate } = router.query; // query 에서 a 가 key 인것을 가져옴
   const handleClick = (e: any) => {
-    e.currentTarget.style.background =
-      "linear-gradient(133.04deg, #005dac 3.19%, #10b592 100%)";
+    // e.currentTarget.style.background =
+    //   "linear-gradient(133.04deg, #005dac 3.19%, #10b592 100%)";
   };
 
   return (
@@ -30,7 +31,11 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
       <Content>
         <FranLayout>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "1" } }}>
+            <Link
+              activeClassName="active"
+              active={!cate || cate === "1"}
+              href={{ query: { cate: "1" } }}
+            >
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <FaHamburger size="20" color="#fff" />
@@ -40,7 +45,11 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "2" } }}>
+            <Link
+              activeClassName="active"
+              active={cate === "2"}
+              href={{ query: { cate: "2" } }}
+            >
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <IoMdCafe size="20" color="#fff" />
@@ -50,7 +59,11 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "3" } }}>
+            <Link
+              activeClassName="active"
+              active={cate === "3"}
+              href={{ query: { cate: "3" } }}
+            >
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <FaStore size="20" color="#fff" />
@@ -60,7 +73,11 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "4" } }}>
+            <Link
+              activeClassName="active"
+              active={cate === "4"}
+              href={{ query: { cate: "4" } }}
+            >
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <MdShoppingBasket size="20" color="#fff" /> <p>마트/편의점</p>
@@ -69,7 +86,11 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "5" } }}>
+            <Link
+              activeClassName="active"
+              active={cate === "5"}
+              href={{ query: { cate: "5" } }}
+            >
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <IoIosMedkit size="20" color="#fff" /> <p>병원/약국</p>
@@ -78,7 +99,11 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "6" } }}>
+            <Link
+              activeClassName="active"
+              active={cate === "6"}
+              href={{ query: { cate: "6" } }}
+            >
               <a className="btn_con">
                 <CircleButton onClick={handleClick}>
                   <MdMovieCreation size="20" color="#fff" /> <p>문화/교육</p>
@@ -131,10 +156,10 @@ const Content = styled.div`
 
 const FranLayout = styled.div`
   display: flex;
-  flex-wrap:nowrap;
+  flex-wrap: nowrap;
   justify-content: space-between;
-  overflow-x:auto;
-  
+  overflow-x: auto;
+
   .btn_con {
     width: 30%;
     margin-bottom: 0.5rem;
@@ -143,7 +168,7 @@ const FranLayout = styled.div`
   p {
     margin: 0;
     font-size: 0.7rem;
-    color: #fff
+    color: #fff;
     font-weight: 600;
   }
 `;
