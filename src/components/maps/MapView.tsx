@@ -37,7 +37,7 @@ const MapView: React.FC<Props> = (props) => {
 
       displayMarker(locPosition, message);
     }
-    function displayMarker(locPosition, message) {
+    function displayMarker(locPosition: any, message: any) {
       // 마커를 생성합니다
 
       let marker = new kakao.maps.Marker({
