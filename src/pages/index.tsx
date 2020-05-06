@@ -18,6 +18,11 @@ type Props = {
 };
 
 const Home: React.FC<Props> = (props) => {
+  const [state, setState] = useState({ visible: false });
+  const handleClick = () => {
+    setState({ visible: !state.visible });
+    console.log(setState);
+  };
   const [map, setMap] = useState(false);
   const { shopStore } = useSelector((state: RootState) => state.global);
   return (
@@ -25,13 +30,15 @@ const Home: React.FC<Props> = (props) => {
       <div className="mobileview">
         <MobileHeader />
         <MobileSubMenu />
-        <MobileStoreList />
-        <div className="mobilepop">
+        {state.visible ? <MobileStoreList /> : null}
+        {/* <div className="mobilepop">
           <MobileStoreCard />
+        </div> */}
+        <div onClick={handleClick}>
+          <FloatContatin>
+            <FloatMenu />
+          </FloatContatin>
         </div>
-        <FloatContatin>
-          <FloatMenu />
-        </FloatContatin>
       </div>
       <MapView />
       <div className="view">

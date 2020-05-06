@@ -185,9 +185,8 @@ const CircleButton = styled.button`
 `;
 
 const Tab = styled.div`
-  .active {
-    color: red;
-    background: "linear-gradient(133.04deg, #005dac 3.19%, #10b592 100%)";
+  .active button {
+    background: linear-gradient(133.04deg, #005dac 3.19%, #10b592 100%);
   }
 `;
 

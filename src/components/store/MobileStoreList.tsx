@@ -5,10 +5,11 @@ import media from "../../lib/styles/media";
 
 export type Props = {
   visible?: boolean;
+  onClick?: () => void;
 };
 
 const MobileStoreList: React.FC<Props> = (props) => {
-  const [state, setState] = useState({ visible: false });
+  const [state, setState] = useState({ visible: true });
   const handleClick = () => {
     setState({ visible: !state.visible });
     console.log(setState);

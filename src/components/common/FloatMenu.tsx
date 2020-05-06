@@ -5,7 +5,7 @@ import media from "../../lib/styles/media";
 type Props = {};
 
 const FloatMenu: React.FC<Props> = (props) => {
-  const [state, setState] = useState({ visible: false });
+  const [state, setState] = useState({ visible: true });
   const handleClick = () => {
     setState({ visible: !state.visible });
   };
