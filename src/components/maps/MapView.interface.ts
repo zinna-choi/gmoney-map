@@ -40,6 +40,8 @@ export declare namespace kakao.maps {
     // level
     setLevel(level: number, options?: SetLevelOptions): void;
     getLevel(): number;
+
+    locPosition(lat: number, lon: number);
   }
 
   export class event {
