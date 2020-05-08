@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Side from "../components/layouts/Side";
-import MapView from "../components/maps/MapView";
 import StorePop from "../components/store/StorePop";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
@@ -12,6 +11,8 @@ import MobileSubMenu from "../components/layouts/MobileSubMenu";
 import FloatMenu from "../components/common/FloatMenu";
 import MobileStoreList from "../components/store/MobileStoreList";
 import MobileStoreCard from "../components/store/MobileStoreCard";
+import KakaoMap from "../components/maps/KakaoMap";
+import { Main } from "./Main";
 
 type Props = {
   className?: string;
@@ -40,7 +41,7 @@ const Home: React.FC<Props> = (props) => {
           </FloatContatin>
         </div>
       </div>
-      <MapView />
+      <Main />
       <div className="view">
         <Side />
       </div>
