@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 const { useEffect, useState, useRef } = React;
 declare const kakao: any;
@@ -78,11 +79,19 @@ const KakaoMap: React.SFC<MapContainProps> = (props) => {
   };
 
   return (
-    <div id="dmap" style={{ width: "100%", height: "100%" }}>
-      {Loader}
-      {map !== null && props.children}
-    </div>
+    <Layout>
+      <div id="dmap" style={{ width: "100vw", height: "100vh" }}>
+        {Loader}
+        {map !== null && props.children}
+      </div>
+    </Layout>
   );
 };
 
+const Layout = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+`;
 export default KakaoMap;
