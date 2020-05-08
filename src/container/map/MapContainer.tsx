@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { withRouter, useRouter } from "next/router";
 import KakaoMap from "../../components/maps/KakaoMap";
 import KakaoMapContext from "../../components/maps/KakaoMapContext";
+import { WithRouterProps } from "next/dist/client/with-router";
 
 const Container = styled.div`
   background-color: #ffffff;
@@ -33,7 +34,7 @@ type StateProps = {
 
 interface MatchParams {}
 
-type Props = {
+type Props = WithRouterProps & {
   onRender?: (map: any) => any;
   router?: any;
 };
