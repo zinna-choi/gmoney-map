@@ -6,14 +6,14 @@ declare const kakao: any;
 
 const Loader = <div>지도를 불러오는 중입니다.</div>;
 
-type IMapsBasicInfo = {
+export type IMapsBasicInfo = {
   latitude: number;
   longitude: number;
   zoom: number;
   map?: any;
 };
 
-type MapProps = {
+export type MapProps = {
   render: (map: any) => void;
   center: {
     latitude: number;
