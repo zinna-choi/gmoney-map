@@ -78,6 +78,16 @@ const KakaoMap: React.SFC<MapContainProps> = (props) => {
       // 지도 중심좌표를 접속위치로 변경합니다
       mapRef.current.setCenter(locPosition);
     }
+
+    kakao.maps.event.addListener(mapRef.current, "idle", mapIdleEventHandler);
+
+    return () => {
+      kakao.maps.event.removeListener(
+        mapRef.current,
+        "idle",
+        mapIdleEventHandler
+      );
+    };
   }, []);
 
   useEffect(() => {
@@ -94,7 +104,7 @@ const KakaoMap: React.SFC<MapContainProps> = (props) => {
   useEffect(() => {}, [props.zoom]);
 
   const mapIdleEventHandler = () => {
-    if (props.onIdle) {
+    if (typeof props.onIdle === "function") {
       const iMap = mapRef.current;
       const locations = iMap.getCenter();
 
