@@ -15,6 +15,15 @@ export declare namespace kakao.maps {
     level: number;
   }
 
+  export class Marker {
+    constructor(options: MarkerOptions);
+  }
+
+  export interface MarkerOptions {
+    map: any;
+    position: LatLng;
+  }
+
   export interface SetLevelOptions {
     anchor?: LatLng;
     animate?:
@@ -41,7 +50,7 @@ export declare namespace kakao.maps {
     setLevel(level: number, options?: SetLevelOptions): void;
     getLevel(): number;
 
-    locPosition(lat: number, lon: number);
+    locPosition(lat: number, lon: number): LatLng;
   }
 
   export class event {
@@ -55,5 +64,13 @@ export declare namespace kakao.maps {
       event: KakaoMapEventTypes,
       listner: () => void
     ): void;
+  }
+
+  export interface InfoWindowOptions {}
+
+  export class InfoWindow {
+    constructor(options: InfoWindowOptions);
+
+    open(map: any, marker: Marker): void;
   }
 }
