@@ -4,7 +4,7 @@ import { shopModel } from "../database/schemes/shop.schema";
 import { ISearchParams } from "./shop.model";
 
 const saveAllByGmoneyResponse = (res: GmoneyApiInterface[]) => {
-  const convert_doc: IShop[] = res.map((item) => ({
+  const convert_doc: IShop[] = res.filter(Boolean).map((item) => ({
     ...item,
     location: {
       type: "Point",
@@ -22,7 +22,6 @@ const clearAll = () => {
 };
 
 export const findAll = async (params: ISearchParams) => {
-  console.log(params);
   const result = await shopModel.aggregate([
     {
       $geoNear: {
