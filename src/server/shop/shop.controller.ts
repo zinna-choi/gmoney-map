@@ -1,22 +1,18 @@
-import { Router } from "express";
-import asyncHandler from "express-async-handler";
-import ShopService from "./shop.service";
+import { Get, QueryParams, Controller } from "routing-controllers";
+import { ISearchParams } from "./shop.model";
+import shopService from "./shop.service";
 
-const router = Router();
-
-const shopService = new ShopService();
-
-router.get(
-  `/v/search`,
-  asyncHandler(async (req, res) => {
-    const { lat, lng, distance } = req.query;
+@Controller()
+class ShopController {
+  @Get("/v/search")
+  async findAllShop(@QueryParams() req: ISearchParams) {
     const data = await shopService.findAll({
-      distance: Number(distance),
-      lat: Number(lat),
-      lng: Number(lng),
+      distance: Number(req.distance),
+      lat: Number(req.lat),
+      lng: Number(req.lng),
     });
-    res.send(data);
-  })
-);
+    return data;
+  }
+}
 
-export default router;
+export default ShopController;

@@ -1,10 +1,12 @@
 require("dotenv").config();
+import "reflect-metadata";
 
 import express from "express";
+import { useExpressServer } from "routing-controllers";
 import next from "next";
 import { databaseProvider } from "./database/database.provider";
 
-import shopCtrl from "./shop/shop.controller";
+import ShopController from "./shop/shop.controller";
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
@@ -16,7 +18,10 @@ const bootstrap = async () => {
   await app.prepare();
   const server = express();
 
-  server.use(shopCtrl);
+  useExpressServer(server, {
+    controllers: [ShopController],
+    classTransformer: false,
+  });
 
   server.all("*", (req, res) => {
     return handle(req, res);
