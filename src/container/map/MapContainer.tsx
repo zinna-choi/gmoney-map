@@ -43,7 +43,11 @@ const MapContainer: React.FC<Props> = (props) => {
     latitude: 37.2750552,
     longitude: 127.0072561,
   });
-
+  const [currentMarker, setCurrentMarker] = useState<{
+    lat: number;
+    lng: number;
+    imageSrc: string;
+  }>();
   const [markers, setMarkers] = useState<IShopDocument[]>([]);
 
   /**
@@ -72,6 +76,8 @@ const MapContainer: React.FC<Props> = (props) => {
     });
   };
 
+  console.log(moveTest);
+
   useEffect(() => {
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -79,15 +85,16 @@ const MapContainer: React.FC<Props> = (props) => {
         let lat: number = position.coords.latitude, // 위도
           lon: number = position.coords.longitude; // 경도
 
-        let message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+        setCurrentMarker({
+          lat: lat,
+          lng: lon,
+          imageSrc: "https://image.flaticon.com/icons/svg/1673/1673188.svg",
+        });
 
-        // setMapCenter({
-        //   latitude: lat,
-        //   longitude: lon,
-        // });
-
-        // 마커와 인포윈도우를 표시합니다
-        // displayMarker(locPosition, message);
+        setMapCenter({
+          latitude: lat,
+          longitude: lon,
+        });
       });
     }
   }, []);
@@ -114,10 +121,17 @@ const MapContainer: React.FC<Props> = (props) => {
             key={marker._id}
             lat={marker.location.coordinates[1]}
             lng={marker.location.coordinates[0]}
+            imageSrc="http://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-Free-Download-PNG.png"
           />
         ))}
-
         {/* 현재 내위치의 마커 */}
+        {currentMarker && (
+          <KakaoMarker
+            lat={currentMarker.lat}
+            lng={currentMarker.lng}
+            imageSrc={currentMarker.imageSrc}
+          />
+        )}
       </KakaoMap>
     </Container>
   );
