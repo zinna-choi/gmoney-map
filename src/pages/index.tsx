@@ -25,7 +25,7 @@ const Home: React.FC<Props> = (props) => {
     console.log(setState);
   };
   const [map, setMap] = useState(false);
-  const { shopStore } = useSelector((state: RootState) => state.global);
+  const { shopStore } = useSelector((state: RootState) => state.store);
   return (
     <LayoutStyeld>
       <div className="mobileview">

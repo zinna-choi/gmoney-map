@@ -1,10 +1,10 @@
 import { combineReducers, createStore } from "redux";
 // import global, { GlobalState } from "./global";
-import { golbalReducer } from "../slice/global-slice";
+import { storeReducer } from "../slices/store-slice";
 import { configureStore } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
-  global: golbalReducer,
+  store: storeReducer,
 });
 
 // const store = createStore(rootReducer);

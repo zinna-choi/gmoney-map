@@ -2,7 +2,7 @@ import React from "react";
 import StoreCard from "./StoreCard";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
-import { setPopStatus } from "../../slice/global-slice";
+import { setPopStatus } from "../../slices/store-slice";
 import styled from "styled-components";
 import media from "../../lib/styles/media";
 
@@ -12,7 +12,7 @@ export type StoreListProps = {
 
 const StoreList: React.FC<StoreListProps> = (props) => {
   const dispatch = useDispatch();
-  const { shopStore } = useSelector((state: RootState) => state.global);
+  const { shopStore } = useSelector((state: RootState) => state.store);
 
   const handleOnClick = () => {
     // ...TODO click

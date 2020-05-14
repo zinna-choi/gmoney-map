@@ -13,6 +13,9 @@ import { WithRouterProps } from "next/dist/client/with-router";
 import KakaoMarker from "../../components/maps/KakaoMarker";
 import ShopAPI from "../../api/ShopAPI";
 import { IShopDocument } from "../../server/shop/shop.interface";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../module";
+import { setMarkers } from "../../slices/store-slice";
 
 export declare const kakao: any;
 
@@ -48,7 +51,11 @@ const MapContainer: React.FC<Props> = (props) => {
     lng: number;
     imageSrc: string;
   }>();
-  const [markers, setMarkers] = useState<IShopDocument[]>([]);
+  //스토어에 저장된 마커 불러오기
+  const dispatch = useDispatch();
+  const { Markers } = useSelector((state: RootState) => state.store);
+
+  // const [markers, setMarkers] = useState<IShopDocument[]>([]);
 
   /**
    * 지도의 zoom level 을 설정합니다.
@@ -102,7 +109,7 @@ const MapContainer: React.FC<Props> = (props) => {
   const findByMapNearShop = async (lat: number, lng: number) => {
     // 데이터를 로딩하고 있다는 표시
     const { data } = await ShopAPI.search({ lat, lng, distance: 500 });
-    setMarkers(data);
+    dispatch(setMarkers(data));
 
     // 데이터를 모두 완료했을때 로딩하고 있다는 표시를 제거
   };
@@ -116,7 +123,7 @@ const MapContainer: React.FC<Props> = (props) => {
         onIdle={handleLocationChange}
         center={mapCenter}
       >
-        {markers.map((marker) => (
+        {Markers.map((marker) => (
           <KakaoMarker
             key={marker._id}
             lat={marker.location.coordinates[1]}
