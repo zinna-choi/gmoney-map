@@ -1,8 +1,8 @@
 import React from "react";
 import StoreCard from "./StoreCard";
 import { useDispatch, useSelector } from "react-redux";
-import { shopPopStore } from "../../module/global";
 import { RootState } from "../../module";
+import { setPopStatus } from "../../slice/global-slice";
 import styled from "styled-components";
 import media from "../../lib/styles/media";
 
@@ -16,7 +16,7 @@ const StoreList: React.FC<StoreListProps> = (props) => {
 
   const handleOnClick = () => {
     // ...TODO click
-    dispatch(shopPopStore(!shopStore));
+    dispatch(setPopStatus(!shopStore));
   };
   return (
     <LayoutStyled>

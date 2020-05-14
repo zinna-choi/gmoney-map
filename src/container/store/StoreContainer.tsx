@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import Header from "./Header";
 import Location from "../location/Location";
@@ -11,12 +11,15 @@ import media from "../../lib/styles/media";
 import { withRouter, useRouter } from "next/router";
 import Link from "../../lib/utility/ActiveLink";
 import { useDispatch, useSelector } from "react-redux";
-
+import { shopPopStore } from "../../module/global";
 import { RootState } from "../../module";
+import { WithRouterProps } from "next/dist/client/with-router";
+import ShopAPI from "../../api/ShopAPI";
+import { IShopDocument } from "../../server/shop/shop.interface";
 
 type Props = {};
 
-const Side: React.FC<Props> = (props) => {
+const StoreContainer: React.FC<Props> = (props) => {
   const router = useRouter();
   return (
     <LayoutStyled>
@@ -171,4 +174,4 @@ const Tab = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-export default Side;
+export default StoreContainer;
