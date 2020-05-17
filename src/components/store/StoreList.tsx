@@ -12,7 +12,7 @@ export type StoreListProps = {
 
 const StoreList: React.FC<StoreListProps> = (props) => {
   const dispatch = useDispatch();
-  const { shopStore } = useSelector((state: RootState) => state.store);
+  const { shopStore, Markers } = useSelector((state: RootState) => state.store);
 
   const handleOnClick = () => {
     // ...TODO click
@@ -22,7 +22,15 @@ const StoreList: React.FC<StoreListProps> = (props) => {
     <LayoutStyled>
       {/* 이벤트 리스너는 StoreCard 에 다 만들고, */}
       {/* 이벤트 핸들러는 StoreCard 를 사용 하는 StoreList 가 제어하는것이 더 독립적이다. */}
-      <StoreCard onClick={handleOnClick} />
+      {Markers.map((item) => (
+        <StoreCard
+          key={item._id}
+          onClick={handleOnClick}
+          address={item.REFINE_LOTNO_ADDR}
+          phoneNo={item.TELNO}
+          shopName={item.CMPNM_NM}
+        />
+      ))}
     </LayoutStyled>
   );
 };

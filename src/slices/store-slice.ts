@@ -3,7 +3,7 @@ import { IShopDocument } from "../server/shop/shop.interface";
 export type StoreState = {
   ShopPpoStore: any;
   shopStore: boolean;
-  Markers: any[];
+  Markers: IShopDocument[];
 };
 const initialState: StoreState = {
   shopStore: false,

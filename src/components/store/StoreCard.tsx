@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Bedge from "../common/Bedge";
 import styled from "styled-components";
-import StoreInfo from "./StoreInfo";
+import StoreInfo, { StoreInfoProps } from "./StoreInfo";
 import media from "../../lib/styles/media";
 
-export type Props = {
+export type Props = StoreInfoProps & {
   onClick?: () => void;
 };
 
@@ -15,7 +15,7 @@ const StoreCard: React.FC<Props> = (props) => {
   return (
     <LayoutStyled onClick={props.onClick}>
       <Bedge index={1}></Bedge>
-      <Info />
+      <Info {...props} />
     </LayoutStyled>
   );
 };

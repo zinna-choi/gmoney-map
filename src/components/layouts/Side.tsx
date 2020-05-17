@@ -18,6 +18,7 @@ type Props = {};
 
 const Side: React.FC<Props> = (props) => {
   const router = useRouter();
+  const { Markers } = useSelector((state: RootState) => state.store);
   return (
     <LayoutStyled>
       <Header />
@@ -97,7 +98,7 @@ const Side: React.FC<Props> = (props) => {
       <Content>
         <div className="result">
           <p>
-            내 주변 <span>10</span> 개
+            내 주변 <span>{Markers.length}</span> 개
           </p>
         </div>
         <StoreList />
