@@ -11,12 +11,11 @@ import media from "../../lib/styles/media";
 import { withRouter, useRouter } from "next/router";
 import Link from "../../lib/utility/ActiveLink";
 import { useDispatch, useSelector } from "react-redux";
-
 import { RootState } from "../../module";
 
-type Props = {};
+export type Props = {};
 
-const Side: React.FC<Props> = (props) => {
+const Side: React.FC<Props> = () => {
   const router = useRouter();
   const { Markers } = useSelector((state: RootState) => state.store);
   return (
@@ -115,6 +114,7 @@ const LayoutStyled = styled.div`
   z-index: 999;
   box-shadow: 1px 1px 22px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  overflow: hidden;
   ${media.small} {
     display: none;
   }

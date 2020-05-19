@@ -1,11 +1,13 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 export type StoreInfoProps = {
-  className?: string;
-  shopName?: string;
-  address?: string;
-  phoneNo?: string;
+  className?: any;
+  shopName?: any;
+  address?: any;
+  telNo?: any;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  children?: ReactNode;
 };
 
 const StoreInfo: React.FC<StoreInfoProps> = (props) => {
@@ -15,7 +17,7 @@ const StoreInfo: React.FC<StoreInfoProps> = (props) => {
         <div className="detail">
           <div className="name">{props.shopName}</div>
           <div className="adress">{props.address}</div>
-          <div className="tel">{props.phoneNo}</div>
+          <div className="tel">{props.telNo}</div>
           <div className="use">지류형/카드형/모바일형</div>
         </div>
         <div className="type">카페</div>
@@ -31,6 +33,7 @@ const LayoutStyled = styled.div`
   color: #bababa;
   justify-content: space-between;
   .detail {
+    width: 86%;
     margin: 0% 3%;
     display: inline-block;
     .name {

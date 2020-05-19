@@ -26,6 +26,7 @@ const Home: React.FC<Props> = (props) => {
   };
   const [map, setMap] = useState(false);
   const { shopStore } = useSelector((state: RootState) => state.store);
+  const { Markers } = useSelector((state: RootState) => state.store);
   return (
     <LayoutStyeld>
       <div className="mobileview">
@@ -45,7 +46,18 @@ const Home: React.FC<Props> = (props) => {
       <div className="view">
         <Side />
       </div>
-      <div className="pop">{shopStore && <StorePop />}</div>
+      {Markers.map((item) => (
+        <div className="pop">
+          {shopStore && (
+            <StorePop
+              key={item._id}
+              shopName={item.CMPNM_NM}
+              address={item.REFINE_LOTNO_ADDR}
+              telNo={item.TELNO}
+            />
+          )}
+        </div>
+      ))}
     </LayoutStyeld>
   );
 };

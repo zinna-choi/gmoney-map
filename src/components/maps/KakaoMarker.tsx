@@ -7,6 +7,7 @@ type Props = {
   lat: number;
   lng: number;
   imageSrc: string;
+  onClick?: () => void;
 };
 
 const KakaoMarker: React.FC<Props> = (props) => {

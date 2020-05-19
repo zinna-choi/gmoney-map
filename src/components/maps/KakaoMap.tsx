@@ -66,6 +66,29 @@ const KakaoMap: React.SFC<MapContainProps> = (props) => {
         position: locPosition,
       });
 
+      //오버레이 상점팝업 추가
+
+      let content =
+        '<div class ="label"><span class="left"></span><span class="center">카카오!</span><span class="right"></span></div>';
+
+      // 마커 위에 커스텀오버레이를 표시합니다
+      // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+      let overlay = new kakao.maps.CustomOverlay({
+        content: content,
+        map: mapRef.current,
+        position: locPosition,
+      });
+
+      // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+      kakao.maps.event.addListener(marker, "click", function() {
+        overlay.setMap(mapRef.current);
+      });
+
+      // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
+      function closeOverlay() {
+        overlay.setMap(null);
+      }
+
       let iwContent = message, // 인포윈도우에 표시할 내용
         iwRemoveable = true;
 

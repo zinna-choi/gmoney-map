@@ -4,17 +4,16 @@ import { IoMdCafe, IoIosMedkit } from "react-icons/io";
 import { MdShoppingBasket, MdMovieCreation } from "react-icons/md";
 import { FaStore, FaHamburger } from "react-icons/fa";
 import RoundButton from "../common/RoundButton";
-import StoreInfo from "./StoreInfo";
+import StoreInfo, { StoreInfoProps } from "./StoreInfo";
 import media from "../../lib/styles/media";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdNavigation } from "react-icons/md";
 import CircleButton from "../common/CircleButton";
 
-type Props = {
+type Props = StoreInfoProps & {
   className?: string;
   icon?: any;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
-
 const StorePop: React.FC<Props> = (props) => {
   return (
     <LayoutStyled className={`${props.className}`}>
@@ -23,7 +22,7 @@ const StorePop: React.FC<Props> = (props) => {
           <MdMovieCreation size="20" color="white" />
         </CateButton>
       </div>
-      <Info></Info>
+      <Info {...props} />
       <LoadBtn title="길찾기"></LoadBtn>
       <div className="mobilebtn">
         <MobileBtn>
@@ -40,8 +39,9 @@ const StorePop: React.FC<Props> = (props) => {
 const LayoutStyled = styled.div`
   display: flex;
   background-color: #fff;
-  width: 100%;
-  padding: 5% 10%;
+  width: 360px;
+  height: 140px;
+  padding: 5% 6%;
   box-sizing: border-box;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;

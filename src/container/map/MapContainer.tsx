@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useCallback,
   useReducer,
+  ReactNode,
 } from "react";
 import styled from "styled-components";
 import { withRouter, useRouter } from "next/router";
@@ -15,7 +16,7 @@ import ShopAPI from "../../api/ShopAPI";
 import { IShopDocument } from "../../server/shop/shop.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
-import { setMarkers } from "../../slices/store-slice";
+import { setMarkers, setPopStatus } from "../../slices/store-slice";
 
 export declare const kakao: any;
 
@@ -30,6 +31,8 @@ const Container = styled.div`
 
 type Props = WithRouterProps & {
   onRender?: (map: any) => any;
+  onClick?: () => void;
+  children?: React.ReactNode;
 };
 
 const MapContainer: React.FC<Props> = (props) => {
@@ -125,6 +128,7 @@ const MapContainer: React.FC<Props> = (props) => {
       >
         {Markers.map((marker) => (
           <KakaoMarker
+            onClick={props.onClick}
             key={marker._id}
             lat={marker.location.coordinates[1]}
             lng={marker.location.coordinates[0]}
