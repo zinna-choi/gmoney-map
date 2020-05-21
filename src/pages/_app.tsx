@@ -3,6 +3,7 @@ import "../style.css";
 import { useEffect } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import store from "../module";
+import "../MarkerStyle.scss";
 
 function MyApp({ Component, pageProps }: any) {
   useEffect(() => {

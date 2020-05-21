@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Side from "../components/layouts/Side";
 import StorePop from "../components/store/StorePop";
@@ -27,6 +27,11 @@ const Home: React.FC<Props> = (props) => {
   const [map, setMap] = useState(false);
   const { shopStore } = useSelector((state: RootState) => state.store);
   const { Markers } = useSelector((state: RootState) => state.store);
+
+  useEffect(() => {
+    console.log(shopStore);
+  }, [shopStore]);
+
   return (
     <LayoutStyeld>
       <div className="mobileview">
@@ -46,18 +51,18 @@ const Home: React.FC<Props> = (props) => {
       <div className="view">
         <Side />
       </div>
-      {Markers.map((item) => (
+      {shopStore && (
         <div className="pop">
-          {shopStore && (
+          {Markers.filter((marker) => marker._id === shopStore).map((item) => (
             <StorePop
               key={item._id}
               shopName={item.CMPNM_NM}
               address={item.REFINE_LOTNO_ADDR}
               telNo={item.TELNO}
             />
-          )}
+          ))}
         </div>
-      ))}
+      )}
     </LayoutStyeld>
   );
 };

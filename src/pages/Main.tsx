@@ -16,20 +16,20 @@ export const Main: React.SFC<MainContainProps> = (props) => {
   const [map, setMap] = useState<any>();
 
   //마커 선택 시, 해당 상점 정보 팝업
-  const dispatch = useDispatch();
-  const { shopStore, Markers } = useSelector((state: RootState) => state.store);
-  dispatch(setMarkers(Markers));
+  // const dispatch = useDispatch();
+  // const { shopStore, Markers } = useSelector((state: RootState) => state.store);
+  // dispatch(setMarkers(Markers));
 
-  const handleOnClick = () => {
-    console.log("ddd");
-    dispatch(setPopStatus(!shopStore));
+  // const handleOnClick = () => {
+  //   console.log("ddd");
+  //   dispatch(setPopStatus(!shopStore));
 
-    // ...TODO click
-  };
+  //   // ...TODO click
+  // };
 
   return (
     <KakaoMapContext.Provider value={map}>
-      <MapContainer onRender={setMap} onClick={handleOnClick} />
+      <MapContainer onRender={setMap} />
     </KakaoMapContext.Provider>
   );
 };

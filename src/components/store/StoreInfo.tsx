@@ -6,7 +6,6 @@ export type StoreInfoProps = {
   shopName?: any;
   address?: any;
   telNo?: any;
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   children?: ReactNode;
 };
 

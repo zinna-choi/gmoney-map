@@ -18,14 +18,19 @@ export type StoreListProps = StoreInfoProps & {
 
 const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
   const dispatch = useDispatch();
-  const { shopStore } = useSelector((state: RootState) => state.store);
-  const { Markers } = useSelector((state: RootState) => state.store);
-  dispatch(setMarkers(Markers));
+  const { shopStore, Markers } = useSelector((state: RootState) => state.store);
 
-  const handleOnClick = (_id: string, key: string) => {
-    if (props.key !== null && _id !== props.key) {
-      dispatch(setPopStatus(!shopStore));
+  useEffect(() => {
+    dispatch(setMarkers(Markers));
+  }, [Markers]);
+
+  const handleOnClick = (_id: string) => {
+    if (shopStore === _id) {
+      dispatch(setPopStatus(undefined));
+    } else {
+      dispatch(setPopStatus(_id));
     }
+
     // ...TODO click
   };
 
@@ -35,7 +40,7 @@ const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
       {/* 이벤트 핸들러는 StoreCard 를 사용 하는 StoreList 가 제어하는것이 더 독립적이다. */}
       {Markers.map((item) => (
         <StoreCard
-          onClick={handleOnClick}
+          onClick={() => handleOnClick(item._id)}
           key={item._id}
           shopName={item.CMPNM_NM}
           address={item.REFINE_LOTNO_ADDR}

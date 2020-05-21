@@ -1,0 +1,177 @@
+.__marker_root {
+  position: relative;
+
+  .__marker_label {
+    transition: all 0.3s;
+  }
+
+  // #a4a3a9
+  &.inactive {
+    border-radius: 10px;
+
+    * {
+      color: #646464 !important;
+    }
+
+    .__marker_label {
+      border-radius: 10px;
+      background-color: #c5c5c5 !important;
+    }
+
+    .__marker_left_bottom.active,
+    .__marker_left_top.active {
+      background-color: transparent !important;
+    }
+
+    .__marker_right_bottom,
+    .__marker_right_top {
+      &:hover {
+        background-color: #a4a3a9 !important;
+      }
+
+      &.active {
+        background-color: #a4a3a9 !important;
+      }
+    }
+  }
+
+  .__marker_ic {
+    object-fit: contain;
+    position: absolute;
+    left: calc(50% - 20px);
+    bottom: -40px;
+    box-sizing: 0 0 1px 0 #eeeeee;
+  }
+
+  &:hover {
+    z-index: 11;
+  }
+
+  .__marker_label {
+    background-color: #ffffff;
+    display: flex;
+    height: 60px;
+    width: 140px;
+    font-size: 12px;
+    box-shadow: 0 0 1px 0 #999999;
+
+    .__marker_left {
+      flex: 1;
+      font-size: 14px;
+      border-right: 1px solid #dddddd;
+      display: flex;
+      flex-direction: column;
+      /* align-items: center; */
+      justify-content: center;
+      text-align: center;
+
+      &.active {
+        background-color: #fef200;
+      }
+
+      .__marker_left_top {
+        flex: 1;
+        display: flex;
+        font-size: 12px;
+        /* border-bottom: 1px solid #dddddd; */
+        justify-content: center;
+        align-items: center;
+        color: #6e62b7;
+        font-weight: bold;
+        cursor: pointer;
+
+        &.active {
+          background-color: #fef200;
+        }
+
+        img {
+          position: relative;
+          left: 0;
+          top: 0;
+          display: inline-block;
+          margin-top: 10px;
+          text-align: center;
+        }
+      }
+
+      .__marker_left_bottom {
+        flex: 1;
+        display: flex;
+        font-size: 0.8em;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        &.active {
+          background-color: #fef200;
+        }
+      }
+    }
+
+    .__marker_right {
+      flex: 1;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      color: #6e62b7;
+
+      .__marker_right_top {
+        flex: 1;
+        border-bottom: 1px solid #dddddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #6e62b7;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #6155ac;
+          color: #ffffff;
+        }
+      }
+
+      .__marker_right_bottom {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #6e62b7;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #6155ac;
+          color: #ffffff;
+        }
+      }
+
+      .act_driving_history.active,
+      .act_detail.active {
+        background-color: #6155ac;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.__history_start_marker__ {
+  position: relative;
+
+  .__history_label__ {
+    color: #cc0001;
+    background-color: #ffffff;
+    box-shadow: 0 0 1px 0 #999999;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    height: 30px;
+    width: 70px;
+    line-height: 30px;
+  }
+
+  .__history__image__ {
+    position: absolute;
+    left: calc(50% - 20px);
+  }
+}

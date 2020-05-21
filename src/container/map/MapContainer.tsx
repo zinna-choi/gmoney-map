@@ -17,6 +17,7 @@ import { IShopDocument } from "../../server/shop/shop.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
 import { setMarkers, setPopStatus } from "../../slices/store-slice";
+import AbMarker from "../../components/maps/AbMarker";
 
 export declare const kakao: any;
 
@@ -86,8 +87,6 @@ const MapContainer: React.FC<Props> = (props) => {
     });
   };
 
-  console.log(moveTest);
-
   useEffect(() => {
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -127,7 +126,7 @@ const MapContainer: React.FC<Props> = (props) => {
         center={mapCenter}
       >
         {Markers.map((marker) => (
-          <KakaoMarker
+          <AbMarker
             onClick={props.onClick}
             key={marker._id}
             lat={marker.location.coordinates[1]}
@@ -137,7 +136,7 @@ const MapContainer: React.FC<Props> = (props) => {
         ))}
         {/* 현재 내위치의 마커 */}
         {currentMarker && (
-          <KakaoMarker
+          <AbMarker
             lat={currentMarker.lat}
             lng={currentMarker.lng}
             imageSrc={currentMarker.imageSrc}
