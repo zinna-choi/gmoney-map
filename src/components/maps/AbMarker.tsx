@@ -140,9 +140,10 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
       telNo,
     });
 
-    kakao.maps.event.addListener(markerRef.current, "click", function() {
+    const Overlay = function(event: any) {
       abMarker.setVisible(true);
       abMarker.setMap(map);
+
       const uniqueSeqRootSelector = `[data-seq="${_id}"] .closeHandler`;
 
       closeHandlerRef.current = document.querySelector(
@@ -154,48 +155,27 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
         abMarker.setVisible(false);
         abMarker.setMap(null);
       });
-
-      console.log(
-        uniqueSeqRootSelector,
-        document.querySelector(`${uniqueSeqRootSelector}`)
-      );
-    });
-
-    //오버레이 마커 이벤트 함수
-
-    // const Overlay = function(event: any) {
-    //   abMarker.setVisible(true);
-    //   abMarker.setMap(map);
-    // };
-
-    // kakao.maps.event.addListener(markerRef.current, "click", Overlay);
-    // kakao.maps.event.removeListener(markerRef.current, "click", Overlay);
-
-    //오버레이 close 버튼 이벤트 함수
-
-    const closeOverlay = function(e: any) {
-      abMarker.setMap(null);
     };
 
-    // function closeOverlay() {
-    //   abMarker.setMap(null);
-    // }
+    kakao.maps.event.addListener(
+      markerRef.current,
+      "click",
+      Overlay
+
+      // console.log(
+      //   uniqueSeqRootSelector,
+      //   document.querySelector(`${uniqueSeqRootSelector}`)
+      // );
+    );
 
     markerRef.current = abMarker;
-
-    // closeHandlerRef.current.addEventListener("click", (e) => {
-    //   alert("click!");
-    // });
-
-    // closeHandlerRef.current.addEventListener("click", closeOverlay);
 
     return () => {
       if (abMarker) {
         abMarker.setMap(null);
         abMarker.setVisible(null);
       }
-
-      // closeHandlerRef.current.removeEventListener("click", closeOverlay);
+      kakao.maps.event.removeListener(markerRef.current, "click", Overlay);
     };
   }, []);
 
