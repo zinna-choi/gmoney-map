@@ -34,6 +34,7 @@ type Props = WithRouterProps & {
   onRender?: (map: any) => any;
   onClick?: () => void;
   children?: React.ReactNode;
+  onClose?: () => void;
 };
 
 const MapContainer: React.FC<Props> = (props) => {
@@ -128,10 +129,16 @@ const MapContainer: React.FC<Props> = (props) => {
         {Markers.map((marker) => (
           <AbMarker
             onClick={props.onClick}
+            // onClose={() => props.setMap(null)}
             key={marker._id}
             lat={marker.location.coordinates[1]}
             lng={marker.location.coordinates[0]}
             imageSrc="http://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-Free-Download-PNG.png"
+            _id={marker._id}
+            shopName={marker.CMPNM_NM}
+            address={marker.REFINE_LOTNO_ADDR}
+            address_R={marker.REFINE_ROADNM_ADDR}
+            telNo={marker.TELNO}
           />
         ))}
         {/* 현재 내위치의 마커 */}

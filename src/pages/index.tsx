@@ -12,7 +12,9 @@ import FloatMenu from "../components/common/FloatMenu";
 import MobileStoreList from "../components/store/MobileStoreList";
 import MobileStoreCard from "../components/store/MobileStoreCard";
 import KakaoMap from "../components/maps/KakaoMap";
-import { Main } from "./Main";
+import dynamic from "next/dynamic";
+
+const Main = dynamic(() => import("./Main"), { ssr: false });
 
 type Props = {
   className?: string;

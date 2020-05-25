@@ -1,177 +1,96 @@
 .__marker_root {
   position: relative;
+  width: 280px;
+  height: 260px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 12px;
+  z-index: 999;
 
   .__marker_label {
-    transition: all 0.3s;
-  }
-
-  // #a4a3a9
-  &.inactive {
-    border-radius: 10px;
-
-    * {
-      color: #646464 !important;
-    }
-
-    .__marker_label {
-      border-radius: 10px;
-      background-color: #c5c5c5 !important;
-    }
-
-    .__marker_left_bottom.active,
-    .__marker_left_top.active {
-      background-color: transparent !important;
-    }
-
-    .__marker_right_bottom,
-    .__marker_right_top {
-      &:hover {
-        background-color: #a4a3a9 !important;
-      }
-
-      &.active {
-        background-color: #a4a3a9 !important;
-      }
-    }
-  }
-
-  .__marker_ic {
-    object-fit: contain;
     position: absolute;
-    left: calc(50% - 20px);
-    bottom: -40px;
-    box-sizing: 0 0 1px 0 #eeeeee;
-  }
-
-  &:hover {
-    z-index: 11;
-  }
-
-  .__marker_label {
-    background-color: #ffffff;
-    display: flex;
-    height: 60px;
-    width: 140px;
-    font-size: 12px;
-    box-shadow: 0 0 1px 0 #999999;
-
-    .__marker_left {
-      flex: 1;
-      font-size: 14px;
-      border-right: 1px solid #dddddd;
-      display: flex;
-      flex-direction: column;
-      /* align-items: center; */
-      justify-content: center;
-      text-align: center;
-
-      &.active {
-        background-color: #fef200;
-      }
-
-      .__marker_left_top {
-        flex: 1;
-        display: flex;
-        font-size: 12px;
-        /* border-bottom: 1px solid #dddddd; */
-        justify-content: center;
-        align-items: center;
-        color: #6e62b7;
-        font-weight: bold;
-        cursor: pointer;
-
-        &.active {
-          background-color: #fef200;
-        }
-
-        img {
-          position: relative;
-          left: 0;
-          top: 0;
-          display: inline-block;
-          margin-top: 10px;
-          text-align: center;
-        }
-      }
-
-      .__marker_left_bottom {
-        flex: 1;
-        display: flex;
-        font-size: 0.8em;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-
-        &.active {
-          background-color: #fef200;
-        }
-      }
-    }
-
-    .__marker_right {
-      flex: 1;
-      font-size: 12px;
-      display: flex;
-      flex-direction: column;
-      color: #6e62b7;
-
-      .__marker_right_top {
-        flex: 1;
-        border-bottom: 1px solid #dddddd;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #6e62b7;
-        font-weight: bold;
-        cursor: pointer;
-
-        &:hover {
-          background-color: #6155ac;
-          color: #ffffff;
-        }
-      }
-
-      .__marker_right_bottom {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #6e62b7;
-        font-weight: bold;
-        cursor: pointer;
-
-        &:hover {
-          background-color: #6155ac;
-          color: #ffffff;
-        }
-      }
-
-      .act_driving_history.active,
-      .act_detail.active {
-        background-color: #6155ac;
-        color: #ffffff;
-      }
-    }
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 260px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    overflow: hidden;
   }
 }
 
-.__history_start_marker__ {
-  position: relative;
+.__marker_root::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -6px;
+  right: -15px;
+  transform: translateX(-10px);
+  border: 15px solid transparent;
+  border-top-color: #10b592;
+  transform: rotate(-143.97deg);
+}
 
-  .__history_label__ {
-    color: #cc0001;
-    background-color: #ffffff;
-    box-shadow: 0 0 1px 0 #999999;
+.__title {
+  border-bottom: 1px solid #10b592;
+  display: flex;
+  width: 100%;
+  padding: 1%;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: middle;
+  padding: 4%;
+  font-size: 16px;
+  font-weight: bold;
+
+  .__logo {
+    img {
+      width: 36px;
+      filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+    }
+    width: 10%;
+  }
+  .__shop_name {
+    width: 80%;
     text-align: center;
-    font-weight: bold;
-    font-size: 12px;
-    height: 30px;
-    width: 70px;
-    line-height: 30px;
+  }
+  .__close {
+    width: 10%;
+    color: #6a6a6a;
+  }
+}
+.__info_con {
+  padding: 6% 4%;
+  box-sizing: border-box;
+  color: #6a6a6a;
+  width: 100%;
+  height: 143px;
+}
+.__store_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  vertical-align: center;
+
+  .__address {
+    color: #000;
   }
 
-  .__history__image__ {
-    position: absolute;
-    left: calc(50% - 20px);
+  .__telNo {
+    color: #005dac;
   }
+}
+.__use {
+  margin-top: 15px;
+}
+.__road_btn {
+  width: 100%;
+  background: #10b592;
+  color: #fff;
+  height: 53px;
+  font-size: 16px;
+  text-align: center;
+  padding: 5%;
+  box-sizing: border-box;
 }
