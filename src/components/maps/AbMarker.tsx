@@ -151,6 +151,8 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
 
       closeHandlerRef.current?.addEventListener("click", (e) => {
         onAbMarkerClose && onAbMarkerClose();
+        abMarker.setVisible(false);
+        abMarker.setMap(null);
       });
 
       console.log(
