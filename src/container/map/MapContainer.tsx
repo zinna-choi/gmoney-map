@@ -139,6 +139,7 @@ const MapContainer: React.FC<Props> = (props) => {
             address={marker.REFINE_LOTNO_ADDR}
             address_R={marker.REFINE_ROADNM_ADDR}
             telNo={marker.TELNO}
+            onAbMarkerClose={() => alert(marker._id)}
           />
         ))}
         {/* 현재 내위치의 마커 */}

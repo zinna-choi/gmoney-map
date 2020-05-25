@@ -20,6 +20,7 @@ type MarkerProps = {
   address?: string;
   address_R?: string;
   telNo?: string;
+  onAbMarkerClose?: () => void;
 };
 
 interface AbstractMarkerType {
@@ -46,7 +47,7 @@ class AbstractMarker extends kakao.maps.AbstractOverlay {
                   <div class="__title">
                     <div class="__logo"><img src="/images/gmoney-02.png" alt="logo" /></div>
                     <div class="__shop_name">${options.shopName}</div>
-                    <div class="__close closeHandler" onclick="${options.onClose} title="닫기" ><img src="/images/close_btn.png" alt="" /></div>
+                    <div class="__close closeHandler" title="닫기" ><img src="/images/close_btn.png" alt="" /></div>
                   </div>
                   <div class="__info_con">
                     <div class="__store_info">
@@ -108,6 +109,7 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
   address,
   address_R,
   telNo,
+  onAbMarkerClose,
 }) => {
   let imageSize = new kakao.maps.Size(25, 25), // 마커이미지의 크기입니다
     imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
@@ -141,6 +143,20 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
     kakao.maps.event.addListener(markerRef.current, "click", function() {
       abMarker.setVisible(true);
       abMarker.setMap(map);
+      const uniqueSeqRootSelector = `[data-seq="${_id}"] .closeHandler`;
+
+      closeHandlerRef.current = document.querySelector(
+        `${uniqueSeqRootSelector}`
+      );
+
+      closeHandlerRef.current?.addEventListener("click", (e) => {
+        onAbMarkerClose && onAbMarkerClose();
+      });
+
+      console.log(
+        uniqueSeqRootSelector,
+        document.querySelector(`${uniqueSeqRootSelector}`)
+      );
     });
 
     //오버레이 마커 이벤트 함수
@@ -165,11 +181,9 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
 
     markerRef.current = abMarker;
 
-    const uniqueSeqRootSelector = `.__marker_root.__marker_data__[data-seq="${_id}"]`;
-
-    closeHandlerRef.current = document.querySelector(
-      `${uniqueSeqRootSelector} .closeHandler`
-    );
+    // closeHandlerRef.current.addEventListener("click", (e) => {
+    //   alert("click!");
+    // });
 
     // closeHandlerRef.current.addEventListener("click", closeOverlay);
 
