@@ -4,10 +4,20 @@ export type StoreState = {
   ShopPpoStore: any;
   shopStore?: string;
   Markers: IShopDocument[];
+  currentMarker?: {
+    lat?: number;
+    lng?: number;
+    imageSrc?: string;
+  };
 };
 const initialState: StoreState = {
   ShopPpoStore: false,
   Markers: [],
+  currentMarker: {
+    lat: 0,
+    lng: 0,
+    imageSrc: "",
+  },
 };
 
 const storeSlice = createSlice({
@@ -20,8 +30,11 @@ const storeSlice = createSlice({
     setMarkers(state, action: PayloadAction<IShopDocument[]>) {
       state.Markers = action.payload;
     },
+    setLocation(state, action: PayloadAction<any>) {
+      state.currentMarker = action.payload;
+    },
   },
 });
 
 export const storeReducer = storeSlice.reducer;
-export const { setPopStatus, setMarkers } = storeSlice.actions;
+export const { setPopStatus, setMarkers, setLocation } = storeSlice.actions;

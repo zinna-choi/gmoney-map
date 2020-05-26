@@ -15,6 +15,9 @@ import KakaoMap from "../components/maps/KakaoMap";
 import dynamic from "next/dynamic";
 
 const Main = dynamic(() => import("./Main"), { ssr: false });
+// const Side = dynamic(() => import("../components/layouts/Side"), {
+//   ssr: false,
+// });
 
 type Props = {
   className?: string;
@@ -50,9 +53,7 @@ const Home: React.FC<Props> = (props) => {
         </div>
       </div>
       <Main />
-      <div className="view">
-        <Side />
-      </div>
+      <Side />
       {shopStore && (
         <div className="pop">
           {Markers.filter((marker) => marker._id === shopStore).map((item) => (

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Header from "./Header";
-import Location from "../location/Location";
+// import Location from "../maps/Location";
 import SearchBox from "../common/SearchBox";
 import { IoMdCafe, IoIosMedkit } from "react-icons/io";
 import { MdShoppingBasket, MdMovieCreation } from "react-icons/md";
@@ -12,17 +12,31 @@ import { withRouter, useRouter } from "next/router";
 import Link from "../../lib/utility/ActiveLink";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
+import { setLocation } from "../../slices/store-slice";
+import dynamic from "next/dynamic";
+
+const Location = dynamic(() => import("../maps/Location"), { ssr: false });
 
 export type Props = {};
 
 const Side: React.FC<Props> = () => {
   const router = useRouter();
-  const { Markers } = useSelector((state: RootState) => state.store);
+  const dispatch = useDispatch();
+  const { Markers, currentMarker } = useSelector(
+    (state: RootState) => state.store
+  );
+
+  useEffect(() => {
+    dispatch(setLocation(currentMarker));
+  }, [currentMarker]);
+
   return (
     <LayoutStyled>
       <Header />
       <Content>
-        <Location />
+        {currentMarker && (
+          <Location lat={currentMarker.lat} lng={currentMarker.lng} />
+        )}
         <SearchBox />
       </Content>
       <hr />

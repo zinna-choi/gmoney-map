@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useReducer,
   ReactNode,
+  useRef,
 } from "react";
 import styled from "styled-components";
 import { withRouter, useRouter } from "next/router";
@@ -16,8 +17,14 @@ import ShopAPI from "../../api/ShopAPI";
 import { IShopDocument } from "../../server/shop/shop.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
-import { setMarkers, setPopStatus } from "../../slices/store-slice";
+import {
+  setMarkers,
+  setPopStatus,
+  setLocation,
+} from "../../slices/store-slice";
 import AbMarker from "../../components/maps/AbMarker";
+import KakaoAPI from "../../api/KakaoAPI";
+import Location from "../../components/maps/Location";
 
 export declare const kakao: any;
 
@@ -50,14 +57,17 @@ const MapContainer: React.FC<Props> = (props) => {
     latitude: 37.2750552,
     longitude: 127.0072561,
   });
-  const [currentMarker, setCurrentMarker] = useState<{
-    lat: number;
-    lng: number;
-    imageSrc: string;
-  }>();
+  // const [currentMarker, setCurrentMarker] = useState<{
+  //   lat: number;
+  //   lng: number;
+  //   imageSrc: string;
+  // }>();
+
   //스토어에 저장된 마커 불러오기
   const dispatch = useDispatch();
-  const { Markers } = useSelector((state: RootState) => state.store);
+  const { Markers, currentMarker } = useSelector(
+    (state: RootState) => state.store
+  );
 
   // const [markers, setMarkers] = useState<IShopDocument[]>([]);
 
@@ -75,6 +85,7 @@ const MapContainer: React.FC<Props> = (props) => {
      * 현재 위/경도 좌표 기준으로, 상점 리스틀 받아옵니다.
      */
     findByMapNearShop(lat, lng);
+    // currentLocation(lat, lng);
   };
 
   /**
@@ -87,6 +98,8 @@ const MapContainer: React.FC<Props> = (props) => {
     });
   };
 
+  // 좌표로 주소받는 라이브러리 goecoder
+
   useEffect(() => {
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -94,11 +107,19 @@ const MapContainer: React.FC<Props> = (props) => {
         let lat: number = position.coords.latitude, // 위도
           lon: number = position.coords.longitude; // 경도
 
-        setCurrentMarker({
-          lat: lat,
-          lng: lon,
-          imageSrc: "https://image.flaticon.com/icons/svg/1673/1673188.svg",
-        });
+        dispatch(
+          setLocation({
+            lat: lat,
+            lng: lon,
+            imageSrc: "https://image.flaticon.com/icons/svg/1673/1673188.svg",
+          })
+        );
+
+        // currentMarker({
+        //   lat: lat,
+        //   lng: lon,
+        //   imageSrc: "https://image.flaticon.com/icons/svg/1673/1673188.svg",
+        // });
 
         setMapCenter({
           latitude: lat,
@@ -108,6 +129,10 @@ const MapContainer: React.FC<Props> = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    dispatch(setLocation(currentMarker));
+  }, [currentMarker]);
+
   const findByMapNearShop = async (lat: number, lng: number) => {
     // 데이터를 로딩하고 있다는 표시
     const { data } = await ShopAPI.search({ lat, lng, distance: 500 });
@@ -115,6 +140,11 @@ const MapContainer: React.FC<Props> = (props) => {
 
     // 데이터를 모두 완료했을때 로딩하고 있다는 표시를 제거
   };
+
+  //좌표로 주소받는 api
+  // const currentLocation = async (x: number, y: number) => {
+  //   const { data } = await KakaoAPI.coord2address({ x, y });
+  // };
 
   return (
     <Container>

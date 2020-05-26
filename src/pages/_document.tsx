@@ -44,7 +44,7 @@ class MyDocument extends Document<any> {
         <Head>
           <script
             type="text/javascript"
-            src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=7b7b111340ebae68aff23a03c21bcd2e"
+            src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=7b7b111340ebae68aff23a03c21bcd2e&libraries=services"
           ></script>
         </Head>
         <body>
