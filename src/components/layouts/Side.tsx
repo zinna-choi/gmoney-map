@@ -26,10 +26,10 @@ const Side: React.FC<Props> = () => {
     (state: RootState) => state.store
   );
 
-  useEffect(() => {
-    dispatch(setLocation(currentMarker));
-  }, [currentMarker]);
-
+  // useEffect(() => {
+  //   dispatch(setLocation(currentMarker));
+  // }, [currentMarker]);
+  console.log("current marker >", currentMarker);
   return (
     <LayoutStyled>
       <Header />

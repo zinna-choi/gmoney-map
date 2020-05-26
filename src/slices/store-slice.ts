@@ -13,11 +13,12 @@ export type StoreState = {
 const initialState: StoreState = {
   ShopPpoStore: false,
   Markers: [],
-  currentMarker: {
-    lat: 0,
-    lng: 0,
-    imageSrc: "",
-  },
+  // currentMarker: {
+  //   lat: 0,
+  //   lng: 0,
+  //   imageSrc: "",
+  // },
+  //geoloaction에서 값이 들어올때까지 location이 렌더링되지 않도록 초기값 삭제
 };
 
 const storeSlice = createSlice({
