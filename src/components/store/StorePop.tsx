@@ -13,8 +13,14 @@ import CircleButton from "../common/CircleButton";
 type Props = StoreInfoProps & {
   className?: string;
   icon?: any;
+  onClick?: () => void;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 const StorePop: React.FC<Props> = (props) => {
+  const btnClick = () => {
+    window.open(
+      `https://map.kakao.com/link/to/${props.shopName},${props.latMarker},${props.lngMarker}`
+    );
+  };
   return (
     <LayoutStyled className={`${props.className}`}>
       <div className="btn_con">
@@ -23,7 +29,7 @@ const StorePop: React.FC<Props> = (props) => {
         </CateButton>
       </div>
       <Info {...props} />
-      <LoadBtn title="길찾기"></LoadBtn>
+      <LoadBtn title="길찾기" {...props} onClick={btnClick}></LoadBtn>
       <div className="mobilebtn">
         <MobileBtn>
           <FaPhoneAlt size="16" />

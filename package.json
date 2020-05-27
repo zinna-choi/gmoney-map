@@ -29,6 +29,7 @@
     "react-icons": "^3.10.0",
     "react-redux": "^7.2.0",
     "react-scripts": "^3.4.1",
+    "react-spinners": "^0.8.3",
     "redux": "^4.0.5",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.8.1",

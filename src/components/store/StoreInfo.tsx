@@ -7,6 +7,8 @@ export type StoreInfoProps = {
   address?: any;
   telNo?: any;
   children?: ReactNode;
+  latMarker?: string;
+  lngMarker?: string;
 };
 
 const StoreInfo: React.FC<StoreInfoProps> = (props) => {

@@ -132,6 +132,8 @@ const LayoutStyled = styled.div`
   ${media.small} {
     display: none;
   }
+  top: 0;
+  left: 0;
 `;
 const Content = styled.div`
   padding: 3%;

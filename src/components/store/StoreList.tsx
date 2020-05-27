@@ -45,6 +45,8 @@ const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
           shopName={item.CMPNM_NM}
           address={item.REFINE_LOTNO_ADDR}
           telNo={item.TELNO}
+          latMarker={item.REFINE_WGS84_LAT}
+          lngMarker={item.REFINE_WGS84_LOGT}
         />
       ))}
     </LayoutStyled>

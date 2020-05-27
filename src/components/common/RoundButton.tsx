@@ -5,6 +5,7 @@ type Props = {
   className?: string;
   title?: string;
   icon?: any;
+  onClick?: () => void;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const RoundButton: React.FC<Props> = (props) => {

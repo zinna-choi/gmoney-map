@@ -25,17 +25,9 @@ import {
 import AbMarker from "../../components/maps/AbMarker";
 import KakaoAPI from "../../api/KakaoAPI";
 import Location from "../../components/maps/Location";
+import { RingLoader } from "react-spinners";
 
 export declare const kakao: any;
-
-const Container = styled.div`
-  background-color: #ffffff;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  flex: 1;
-`;
 
 type Props = WithRouterProps & {
   onRender?: (map: any) => any;
@@ -62,6 +54,8 @@ const MapContainer: React.FC<Props> = (props) => {
   //   lng: number;
   //   imageSrc: string;
   // }>();
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   //스토어에 저장된 마커 불러오기
   const dispatch = useDispatch();
@@ -134,9 +128,15 @@ const MapContainer: React.FC<Props> = (props) => {
   }, [currentMarker]);
 
   const findByMapNearShop = async (lat: number, lng: number) => {
-    // 데이터를 로딩하고 있다는 표시
-    const { data } = await ShopAPI.search({ lat, lng, distance: 500 });
-    dispatch(setMarkers(data));
+    try {
+      setLoading(true);
+
+      // 데이터를 로딩하고 있다는 표시
+      const { data } = await ShopAPI.search({ lat, lng, distance: 500 });
+      dispatch(setMarkers(data));
+    } finally {
+      setLoading(false);
+    }
 
     // 데이터를 모두 완료했을때 로딩하고 있다는 표시를 제거
   };
@@ -181,8 +181,44 @@ const MapContainer: React.FC<Props> = (props) => {
           />
         )}
       </KakaoMap>
+      {loading === true && (
+        <MaskComponentStyled>
+          <RingLoader color="#10b592" />
+          <p>주변 가맹점 탐색중...</p>
+        </MaskComponentStyled>
+      )}
     </Container>
   );
 };
+
+const Container = styled.div`
+  background-color: #ffffff;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  flex: 1;
+`;
+
+const MaskComponentStyled = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: 20px;
+    color: #10b592;
+  }
+`;
 
 export default withRouter(MapContainer);

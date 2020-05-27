@@ -62,6 +62,8 @@ const Home: React.FC<Props> = (props) => {
               shopName={item.CMPNM_NM}
               address={item.REFINE_LOTNO_ADDR}
               telNo={item.TELNO}
+              latMarker={item.REFINE_WGS84_LAT}
+              lngMarker={item.REFINE_WGS84_LOGT}
             />
           ))}
         </div>
