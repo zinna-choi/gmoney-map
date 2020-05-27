@@ -128,6 +128,7 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
   );
   const map = useContext(KakaoMapContext);
   const markerRef = useRef<any>(null);
+  const abMarkerRef = useRef<any>(null);
 
   const closeHandlerRef = useRef<HTMLElement>();
 
@@ -138,7 +139,7 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
       image: markerImage,
     });
 
-    const abMarker: any = new AbstractMarker(new kakao.maps.LatLng(lat, lng), {
+    abMarkerRef.current = new AbstractMarker(new kakao.maps.LatLng(lat, lng), {
       _id,
       shopName,
       address,
@@ -149,8 +150,8 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
     });
 
     const Overlay = function(event: any) {
-      abMarker.setVisible(true);
-      abMarker.setMap(map);
+      abMarkerRef.current.setVisible(true);
+      abMarkerRef.current.setMap(map);
 
       const uniqueSeqRootSelector = `[data-seq="${_id}"] .closeHandler`;
 
@@ -160,8 +161,8 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
 
       closeHandlerRef.current?.addEventListener("click", (e) => {
         onAbMarkerClose && onAbMarkerClose();
-        abMarker.setVisible(false);
-        abMarker.setMap(null);
+        abMarkerRef.current.setVisible(false);
+        abMarkerRef.current.setMap(null);
       });
     };
 
@@ -176,13 +177,14 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
       // );
     );
 
-    markerRef.current = abMarker;
-
     return () => {
-      if (abMarker) {
-        abMarker.setMap(null);
-        abMarker.setVisible(null);
+      if (abMarkerRef.current) {
+        abMarkerRef.current.setMap(null);
       }
+      if (markerRef.current) {
+        markerRef.current.setMap(null);
+      }
+
       kakao.maps.event.removeListener(markerRef.current, "click", Overlay);
     };
   }, []);
