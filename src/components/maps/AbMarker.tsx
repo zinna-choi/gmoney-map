@@ -21,6 +21,8 @@ type MarkerProps = {
   address_R?: string;
   telNo?: string;
   onAbMarkerClose?: () => void;
+  latMarker?: string;
+  lngMarker?: string;
 };
 
 interface AbstractMarkerType {
@@ -31,6 +33,8 @@ interface AbstractMarkerType {
   telNo?: string;
   closeHandler?: any;
   onClose?: () => void;
+  latMarker?: string;
+  lngMarker?: string;
 }
 
 class AbstractMarker extends kakao.maps.AbstractOverlay {
@@ -63,7 +67,7 @@ class AbstractMarker extends kakao.maps.AbstractOverlay {
                   <div class="__use">지류형-모바일형-카드형</div>
                   </div>
                   <div class="__road_btn">
-                   길찾기
+                  <a href ="https://map.kakao.com/link/to/${options.shopName},${options.latMarker},${options.lngMarker}" target="_blank">길찾기</a>
                   </div>
                 </div>
             </div>
@@ -110,6 +114,8 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
   address_R,
   telNo,
   onAbMarkerClose,
+  latMarker,
+  lngMarker,
 }) => {
   let imageSize = new kakao.maps.Size(25, 25), // 마커이미지의 크기입니다
     imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
@@ -138,6 +144,8 @@ const Marker: React.FunctionComponent<MarkerProps> = ({
       address,
       address_R,
       telNo,
+      latMarker,
+      lngMarker,
     });
 
     const Overlay = function(event: any) {
