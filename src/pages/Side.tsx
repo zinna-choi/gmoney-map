@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import KakaoMapContext from "../components/maps/KakaoMapContext";
 import { withRouter } from "next/router";
 import MapContainer from "../container/map/MapContainer";
-import StoreContainer from "../container/store/StoreContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../module";
 import { setMarkers, setPopStatus } from "../slices/store-slice";
-
+import StoreContainer from "../container/store/StoreContainer";
 type MainContainProps = {
   onRender?: any;
 };
@@ -16,24 +15,7 @@ export const Main: React.SFC<MainContainProps> = (props) => {
    */
   const [map, setMap] = useState<any>();
 
-  //마커 선택 시, 해당 상점 정보 팝업
-  // const dispatch = useDispatch();
-  // const { shopStore, Markers } = useSelector((state: RootState) => state.store);
-  // dispatch(setMarkers(Markers));
-
-  // const handleOnClick = () => {
-  //   console.log("ddd");
-  //   dispatch(setPopStatus(!shopStore));
-
-  //   // ...TODO click
-  // };
-
-  return (
-    <KakaoMapContext.Provider value={map}>
-      <MapContainer onRender={setMap} />
-      <StoreContainer />
-    </KakaoMapContext.Provider>
-  );
+  return <KakaoMapContext.Provider value={map}></KakaoMapContext.Provider>;
 };
 
 export default withRouter(Main);

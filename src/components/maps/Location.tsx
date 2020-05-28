@@ -8,11 +8,11 @@ import React, {
 } from "react";
 import styled from "styled-components";
 import RoundButton from "../common/RoundButton";
-import { BsArrowRepeat } from "react-icons/bs";
+import { FiSearch } from "react-icons/fi";
 import KakaoMapContext from "./KakaoMapContext";
 
 declare const window: any;
-const { kakao } = window;
+const { kakao, daum } = window;
 
 type Props = {
   children?: ReactNode;
@@ -24,8 +24,34 @@ type Props = {
 
 const Location: React.FC<Props> = (props) => {
   const map = useContext(KakaoMapContext);
-
   const geocoder = new kakao.maps.services.Geocoder();
+
+  const GMPostcode = () => {
+    new daum.Postcode({
+      oncomplete: function(data: any) {
+        const addr = data.address; // 최종 주소 변수
+
+        // 주소 정보를 해당 필드에 넣는다.
+        document.getElementById("centerAddr").innerHTML = addr;
+        // 주소로 상세 정보를 검색
+        geocoder.addressSearch(data.address, function(
+          results: any,
+          status: any
+        ) {
+          // 정상적으로 검색이 완료됐으면
+          if (status === kakao.maps.services.Status.OK) {
+            const result = results[0]; //첫번째 결과의 값을 활용
+
+            // 해당 주소에 대한 좌표를 받아서
+            const coords = new kakao.maps.LatLng(result.y, result.x);
+            console.log(coords);
+            console.log("map>", map);
+            map.setCenter(coords);
+          }
+        });
+      },
+    }).open();
+  };
 
   useEffect(() => {
     const latlng = new kakao.maps.LatLng(props.lat, props.lng);
@@ -56,14 +82,25 @@ const Location: React.FC<Props> = (props) => {
     <LayoutStyled>
       <Current>
         <div className="current-loca" id="centerAddr"></div>
-        <LocaButton title="위치재설정" icon={<BsArrowRepeat />}></LocaButton>
+        <LocaButton
+          title="직접검색"
+          icon={<FiSearch size="16" />}
+          onClick={GMPostcode}
+        ></LocaButton>
       </Current>
     </LayoutStyled>
   );
 };
 
 const LayoutStyled = styled.div``;
-const LocaButton = styled(RoundButton)``;
+const LocaButton = styled(RoundButton)`
+  vertical-align: middle;
+  font-weight: 300;
+  svg {
+    margin-left: 5px;
+    vertical-align: text-top;
+  }
+`;
 const Current = styled.div`
   display: flex;
   align-items: center;

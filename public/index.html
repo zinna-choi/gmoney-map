@@ -28,7 +28,11 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+      window.daum = daum;
+    </script>
     <div id="root"></div>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script
       type="text/javascript"
       src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=7b7b111340ebae68aff23a03c21bcd2e&libraries=services"
@@ -36,6 +40,7 @@
     <script>
       window.kakao = kakao;
     </script>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

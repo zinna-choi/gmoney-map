@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Side from "../components/layouts/Side";
+// import Side from "./Side";
 import StorePop from "../components/store/StorePop";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
@@ -53,7 +53,7 @@ const Home: React.FC<Props> = (props) => {
         </div>
       </div>
       <Main />
-      <Side />
+      {/* <Side /> */}
       {shopStore && (
         <div className="pop">
           {Markers.filter((marker) => marker._id === shopStore).map((item) => (
