@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../module";
+import { setMapCenter } from "../../slices/store-slice";
 
 const { useEffect, useState, useRef } = React;
 declare const kakao: any;
@@ -26,6 +29,10 @@ export type MapProps = {
 type MapContainProps = MapProps & {};
 
 const KakaoMap: React.SFC<MapContainProps> = (props) => {
+  const dispatch = useDispatch();
+  const { Markers, currentMarker, mapCenter } = useSelector(
+    (state: RootState) => state.store
+  );
   const mapRef = useRef<any>();
 
   useEffect(() => {
@@ -133,7 +140,6 @@ const KakaoMap: React.SFC<MapContainProps> = (props) => {
     if (typeof props.onIdle === "function") {
       const iMap = mapRef.current;
       const locations = iMap.getCenter();
-
       const zoom: number = iMap.getLevel();
 
       props.onIdle({

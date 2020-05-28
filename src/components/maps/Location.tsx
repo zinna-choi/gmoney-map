@@ -52,7 +52,7 @@ const Location: React.FC<Props> = (props) => {
       },
     }).open();
   };
-
+  //현재위치 행정동 표시
   useEffect(() => {
     const latlng = new kakao.maps.LatLng(props.lat, props.lng);
 
@@ -76,6 +76,37 @@ const Location: React.FC<Props> = (props) => {
         }
       }
     }
+  }, []);
+  //idle 이벤트 발생 시(지동이동, 확대, 축소), 중심좌표 반환 후 행정동 표시
+  useEffect(() => {
+    function searchAddrFromCoords(coords: any, callback: any) {
+      // 좌표로 행정동 주소 정보를 요청합니다
+      geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
+    }
+
+    function displayCenterInfo(result: any, status: any) {
+      if (status === kakao.maps.services.Status.OK) {
+        var infoDiv = document.getElementById("centerAddr");
+
+        for (var i = 0; i < result.length; i++) {
+          // 행정동의 region_type 값은 'H' 이므로
+          if (result[i].region_type === "H") {
+            infoDiv.innerHTML = result[i].address_name;
+            break;
+          }
+        }
+      }
+    }
+
+    kakao.maps.event.addListener(map, "idle", function() {
+      searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+    });
+
+    return () => {
+      kakao.maps.event.removeListener(map, "idle", function() {
+        searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+      });
+    };
   }, []);
 
   return (

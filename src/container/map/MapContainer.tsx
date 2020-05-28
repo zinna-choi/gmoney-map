@@ -21,6 +21,7 @@ import {
   setMarkers,
   setPopStatus,
   setLocation,
+  setMapCenter,
 } from "../../slices/store-slice";
 import AbMarker from "../../components/maps/AbMarker";
 import KakaoAPI from "../../api/KakaoAPI";
@@ -42,13 +43,13 @@ const MapContainer: React.FC<Props> = (props) => {
   /**
    * 지도의 중심 좌표를 설정합니다.
    */
-  const [mapCenter, setMapCenter] = useState<{
-    latitude: number;
-    longitude: number;
-  }>({
-    latitude: 37.2750552,
-    longitude: 127.0072561,
-  });
+  // const [mapCenter, setMapCenter] = useState<{
+  //   latitude: number;
+  //   longitude: number;
+  // }>({
+  //   latitude: 37.2750552,
+  //   longitude: 127.0072561,
+  // });
   // const [currentMarker, setCurrentMarker] = useState<{
   //   lat: number;
   //   lng: number;
@@ -59,7 +60,7 @@ const MapContainer: React.FC<Props> = (props) => {
 
   //스토어에 저장된 마커 불러오기
   const dispatch = useDispatch();
-  const { Markers, currentMarker } = useSelector(
+  const { Markers, currentMarker, mapCenter } = useSelector(
     (state: RootState) => state.store
   );
 
@@ -79,7 +80,6 @@ const MapContainer: React.FC<Props> = (props) => {
      * 현재 위/경도 좌표 기준으로, 상점 리스틀 받아옵니다.
      */
     findByMapNearShop(lat, lng);
-    // currentLocation(lat, lng);
   };
 
   /**
@@ -114,18 +114,24 @@ const MapContainer: React.FC<Props> = (props) => {
         //   lng: lon,
         //   imageSrc: "https://image.flaticon.com/icons/svg/1673/1673188.svg",
         // });
+        dispatch(
+          setMapCenter({
+            latitude: lat,
+            longitude: lon,
+          })
+        );
 
-        setMapCenter({
-          latitude: lat,
-          longitude: lon,
-        });
+        // setMapCenter({
+        //   latitude: lat,
+        //   longitude: lon,
+        // });
       });
     }
   }, []);
 
-  useEffect(() => {
-    dispatch(setLocation(currentMarker));
-  }, [currentMarker]);
+  // useEffect(() => {
+  //   dispatch(setLocation(currentMarker));
+  // }, [currentMarker]);
 
   const findByMapNearShop = async (lat: number, lng: number) => {
     try {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 import Header from "../../components/layouts/Header";
 // import Location from "../maps/Location";
@@ -12,9 +12,11 @@ import { withRouter, useRouter } from "next/router";
 import Link from "../../lib/utility/ActiveLink";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
-import { setLocation } from "../../slices/store-slice";
+import { setLocation, setMapCenter } from "../../slices/store-slice";
+import KakaoMapContext from "../../components/maps/KakaoMapContext";
 import dynamic from "next/dynamic";
 
+declare const kakao: any;
 const Location = dynamic(() => import("../../components/maps/Location"), {
   ssr: false,
 });
@@ -26,20 +28,23 @@ export type Props = {
 const Side: React.FC<Props> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { Markers, currentMarker } = useSelector(
+  const { Markers, currentMarker, mapCenter } = useSelector(
     (state: RootState) => state.store
   );
+  const map = useContext(KakaoMapContext);
 
-  // useEffect(() => {
-  //   dispatch(setLocation(currentMarker));
-  // }, [currentMarker]);
+  useEffect(() => {
+    dispatch(setMapCenter(mapCenter));
+  }, [mapCenter]);
+
   console.log("current marker >", currentMarker);
+  console.log("mapcenterr >", mapCenter);
   return (
     <LayoutStyled>
       <Header />
       <Content>
-        {currentMarker && (
-          <Location lat={currentMarker.lat} lng={currentMarker.lng} />
+        {mapCenter && (
+          <Location lat={mapCenter.latitude} lng={mapCenter.longitude} />
         )}
         <SearchBox />
       </Content>

@@ -9,6 +9,10 @@ export type StoreState = {
     lng?: number;
     imageSrc?: string;
   };
+  mapCenter?: {
+    latitude: number;
+    longitude: number;
+  };
 };
 const initialState: StoreState = {
   ShopPpoStore: false,
@@ -19,6 +23,10 @@ const initialState: StoreState = {
   //   imageSrc: "",
   // },
   //geoloaction에서 값이 들어올때까지 location이 렌더링되지 않도록 초기값 삭제
+  mapCenter: {
+    latitude: 37.2750552,
+    longitude: 127.0072561,
+  },
 };
 
 const storeSlice = createSlice({
@@ -34,8 +42,16 @@ const storeSlice = createSlice({
     setLocation(state, action: PayloadAction<any>) {
       state.currentMarker = action.payload;
     },
+    setMapCenter(state, action: PayloadAction<any>) {
+      state.mapCenter = action.payload;
+    },
   },
 });
 
 export const storeReducer = storeSlice.reducer;
-export const { setPopStatus, setMarkers, setLocation } = storeSlice.actions;
+export const {
+  setPopStatus,
+  setMarkers,
+  setLocation,
+  setMapCenter,
+} = storeSlice.actions;
