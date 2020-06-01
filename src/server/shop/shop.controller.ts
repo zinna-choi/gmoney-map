@@ -10,6 +10,7 @@ class ShopController {
       distance: Number(req.distance),
       lat: Number(req.lat),
       lng: Number(req.lng),
+      q: req.q,
     });
     return data;
   }

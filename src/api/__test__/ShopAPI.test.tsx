@@ -8,5 +8,12 @@ describe("상점 API 테스트", () => {
     });
     console.log(data);
   });
-  test("상점 키워드로 API 호출 테스트", () => {});
+  test("상점 키워드로 API 호출 테스트", async () => {
+    const { data, status } = await ShopAPI.search({
+      q: "시흥꽃",
+    });
+
+    console.log(data);
+    expect(status).toBe(200);
+  });
 });

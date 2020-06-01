@@ -22,21 +22,35 @@ const clearAll = () => {
 };
 
 export const findAll = async (params: ISearchParams) => {
-  const result = await shopModel.aggregate([
-    {
-      $geoNear: {
-        near: {
-          type: "point",
-          coordinates: [params.lng, params.lat],
-        },
-        distanceField: "distance",
-        maxDistance: params.distance,
-      },
-    },
-    { $limit: 1000 },
-  ]);
+  let result = null;
 
-  console.log(result.length);
+  console.log("query", params);
+
+  if (!params.q) {
+    result = await shopModel.aggregate<IShopDocument>([
+      {
+        $geoNear: {
+          near: {
+            type: "point",
+            coordinates: [params.lng, params.lat],
+          },
+          distanceField: "distance",
+          maxDistance: params.distance,
+        },
+      },
+      { $limit: 1000 },
+    ]);
+  }
+
+  if (!!params.q) {
+    result = await shopModel.find({
+      CMPNM_NM: {
+        $regex: params.q,
+        $options: "i",
+      },
+    });
+  }
+
   return result;
 };
 

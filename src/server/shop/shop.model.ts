@@ -1,7 +1,8 @@
 export class ISearchParams {
-  lat: number;
+  lat?: number;
 
-  lng: number;
+  lng?: number;
 
-  distance: number;
+  distance?: number;
+  q?: string;
 }
