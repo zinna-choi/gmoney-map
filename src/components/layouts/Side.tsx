@@ -12,7 +12,7 @@ import { withRouter, useRouter } from "next/router";
 import Link from "../../lib/utility/ActiveLink";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
-import { setLocation } from "../../slices/store-slice";
+import { setLocation, setMapCenter } from "../../slices/store-slice";
 import KakaoMapContext from "../../components/maps/KakaoMapContext";
 import dynamic from "next/dynamic";
 

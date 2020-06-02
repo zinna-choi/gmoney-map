@@ -12,7 +12,6 @@ import { withRouter, useRouter } from "next/router";
 import KakaoMap, { IMapsBasicInfo } from "../../components/maps/KakaoMap";
 import KakaoMapContext from "../../components/maps/KakaoMapContext";
 import { WithRouterProps } from "next/dist/client/with-router";
-import KakaoMarker from "../../components/maps/KakaoMarker";
 import ShopAPI from "../../api/ShopAPI";
 import { IShopDocument } from "../../server/shop/shop.interface";
 import { useDispatch, useSelector } from "react-redux";

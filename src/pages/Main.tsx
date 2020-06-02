@@ -10,6 +10,16 @@ import { setMarkers, setPopStatus } from "../slices/store-slice";
 type MainContainProps = {
   onRender?: any;
 };
+declare global {
+  namespace NodeJS {
+    interface Global {
+      document: Document;
+      window: Window;
+      navigator: Navigator;
+    }
+  }
+}
+
 export const Main: React.SFC<MainContainProps> = (props) => {
   /**
    * 지도 객체 입니다. render 가 된 후 context API 로 들어갑니다.
