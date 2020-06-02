@@ -14,7 +14,7 @@ import MobileStoreCard from "../components/store/MobileStoreCard";
 import KakaoMap from "../components/maps/KakaoMap";
 import dynamic from "next/dynamic";
 
-const Main = dynamic(() => import("./Main"), { ssr: false });
+const Main = dynamic(() => import("../container/Main"), { ssr: false });
 // const Side = dynamic(() => import("../components/layouts/Side"), {
 //   ssr: false,
 // });
