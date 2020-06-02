@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import KakaoMapContext from "../components/maps/KakaoMapContext";
 import { withRouter } from "next/router";
-import MapContainer from "../container/map/MapContainer";
+import MapContainer from "./map/MapContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../module";
 import { setMarkers, setPopStatus } from "../slices/store-slice";
-import StoreContainer from "../container/store/StoreContainer";
+import StoreContainer from "./store/StoreContainer";
 type MainContainProps = {
   onRender?: any;
 };
