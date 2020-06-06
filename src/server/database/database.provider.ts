@@ -1,11 +1,18 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 import process from "../../process";
 
-export const databaseProvider = async () => {
+let cachedDb = null;
+
+export const databaseProvider = async (): Promise<Mongoose> => {
   console.log("Load DatabaseProvider");
 
+  if (cachedDb) {
+    console.log("Cache DB");
+    return cachedDb;
+  }
+
   try {
-    await mongoose.connect(
+    const connection = mongoose.connect(
       `mongodb://${process.MONGODB_HOST}:${process.MONGODB_PORT}/${process.MONGODB_DATABASE}`,
       {
         useNewUrlParser: true,
@@ -15,7 +22,8 @@ export const databaseProvider = async () => {
       }
     );
 
-    console.log("Database Load Success");
+    cachedDb = connection;
+    return connection;
   } catch (e) {
     console.log("Database Load Failed....!");
   }

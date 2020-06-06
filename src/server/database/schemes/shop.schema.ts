@@ -32,8 +32,10 @@ export const ShopSchema = new mongoose.Schema<IShopDocument>({
   },
 });
 
-export const shopModel = mongoose.model<IShopDocument>(
-  "shop",
-  ShopSchema,
-  "Shop"
-);
+if (!mongoose.models.shop) {
+  console.log("once build shop scheme");
+}
+
+export const shopModel =
+  mongoose.models.shop ||
+  mongoose.model<IShopDocument>("shop", ShopSchema, "Shop");

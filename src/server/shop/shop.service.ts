@@ -2,8 +2,10 @@ import { GmoneyApiInterface } from "../gmoney/gmoney.interface";
 import { IShopDocument, IShop } from "./shop.interface";
 import { shopModel } from "../database/schemes/shop.schema";
 import { ISearchParams } from "./shop.model";
+import { databaseProvider } from "../database/database.provider";
 
-const saveAllByGmoneyResponse = (res: GmoneyApiInterface[]) => {
+const saveAllByGmoneyResponse = async (res: GmoneyApiInterface[]) => {
+  await databaseProvider();
   const convert_doc: IShop[] = res.filter(Boolean).map((item) => ({
     ...item,
     location: {
@@ -17,14 +19,15 @@ const saveAllByGmoneyResponse = (res: GmoneyApiInterface[]) => {
   return shopModel.insertMany(convert_doc);
 };
 
-const clearAll = () => {
+const clearAll = async () => {
+  await databaseProvider();
   return shopModel.deleteMany({});
 };
 
 export const findAll = async (params: ISearchParams) => {
-  let result = null;
+  await databaseProvider();
 
-  console.log("query", params);
+  let result = null;
 
   if (!params.q) {
     result = await shopModel.aggregate<IShopDocument>([
