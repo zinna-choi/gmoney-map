@@ -1,5 +1,4 @@
 import mongoose, { Mongoose } from "mongoose";
-import process from "../../process";
 
 let cachedDb = null;
 
@@ -12,15 +11,12 @@ export const databaseProvider = async (): Promise<Mongoose> => {
   }
 
   try {
-    const connection = mongoose.connect(
-      `mongodb://${process.MONGODB_HOST}:${process.MONGODB_PORT}/${process.MONGODB_DATABASE}`,
-      {
-        useNewUrlParser: true,
-        readPreference: "primary",
-        ssl: false,
-        useUnifiedTopology: true,
-      }
-    );
+    const connection = mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      // readPreference: "primary",
+      // ssl: false,
+      useUnifiedTopology: true,
+    });
 
     cachedDb = connection;
     return connection;
