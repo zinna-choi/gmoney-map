@@ -1,4 +1,4 @@
-# 경기도 지역화폐 찾아보기
+# 경기도 지역화폐 가맹점 찾기
 
 ## 개요
 
@@ -63,22 +63,17 @@ g-money-map은 경기도 지역화폐 가맹점을 사용자의 위치 및 지�
 
 ```
 $ vercel env add
-REACT_APP_KAKAO_MAP_KEY
-{카카오에서 발급받은 javascript key}
-
-$ vercel env add
 KAKAO_REST_KEY
-{카카오에서 발급받은 맵 REST KEY}
+{카카오에서 발급받은 javascript key}
 
 ...
 ```
 
-위 안내에 따라, 다음 4개 환경변수를 설정 해주세요.
+위 안내에 따라, 다음 3개 환경변수를 설정 해주세요.
 
-- REACT_APP_KAKAO_MAP_KEY
-- KAKAO_REST_KEY
-- MONGODB_URI
-- GMONEY_API_KEY
+- GMONEY_API_KEY=
+- MONGODB_URI=
+- KAKAO_REST_KEY=
 
 ## 앱 배포하기
 
