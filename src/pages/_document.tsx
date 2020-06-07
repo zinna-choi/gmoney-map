@@ -45,7 +45,7 @@ class MyDocument extends Document<any> {
           <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
           <script
             type="text/javascript"
-            src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=7b7b111340ebae68aff23a03c21bcd2e&libraries=services"
+            src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_KEY}&libraries=services`}
           ></script>
         </Head>
         <body>

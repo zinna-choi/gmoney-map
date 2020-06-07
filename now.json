@@ -1,9 +1,0 @@
-{
-  "env": {
-    "REACT_APP_KAKAO_MAP_KEY": "@kakao-map-key",
-    "GMONEY_API_KEY": "@gmoney-api-key",
-    "MONGODB_HOST": "@mongodb-host",
-    "MONGODB_PORT": "@mongodb-port",
-    "MONGODB_DATABASE": "@mongodb-database"
-  }
-}
