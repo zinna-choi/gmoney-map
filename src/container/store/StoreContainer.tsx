@@ -141,14 +141,14 @@ const Side: React.FC<Props> = () => {
         </FranLayout>
       </Content>
       <hr />
-      <Content>
+      <ListContent>
         <div className="result">
           <p>
             내 주변 <span>{Markers.length}</span> 개
           </p>
         </div>
         <StoreList />
-      </Content>
+      </ListContent>
     </LayoutStyled>
   );
 };
@@ -188,6 +188,13 @@ const Content = styled.div`
       font-weight: bold;
     }
   }
+`;
+
+const ListContent = styled(Content)`
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 531px + 82px);
 `;
 
 const FranLayout = styled.div`

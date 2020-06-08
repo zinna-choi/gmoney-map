@@ -83,12 +83,12 @@ const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
 };
 
 const LayoutStyled = styled.div`
+  position: absolute;
+  top: 40px;
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  height: 252px;
   padding: 2%;
-
   ${media.small} {
     z-index: 200;
   }
