@@ -1,12 +1,17 @@
-import React, { useEffect, ReactNode } from "react";
+import React, { useEffect, ReactNode, useState } from "react";
 import StoreCard from "./StoreCard";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
-import { setPopStatus, setMarkers } from "../../slices/store-slice";
+import {
+  setPopStatus,
+  setMarkers,
+  setSearchInput,
+} from "../../slices/store-slice";
 import GmoneyAPI from "../../api/GmoneyAPI";
 import styled from "styled-components";
 import media from "../../lib/styles/media";
 import { StoreInfoProps } from "./StoreInfo";
+import ShopAPI from "../../api/ShopAPI";
 
 export type StoreListProps = StoreInfoProps & {
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) &
@@ -14,11 +19,14 @@ export type StoreListProps = StoreInfoProps & {
   _id?: string;
   key?: string;
   children?: ReactNode;
+  text?: any;
 };
 
 const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
   const dispatch = useDispatch();
-  const { shopStore, Markers } = useSelector((state: RootState) => state.store);
+  const { shopStore, Markers, searchInput } = useSelector(
+    (state: RootState) => state.store
+  );
 
   useEffect(() => {
     dispatch(setMarkers(Markers));
@@ -33,22 +41,43 @@ const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
 
     // ...TODO click
   };
+  //검색 api
+
+  useEffect(() => {
+    if (searchInput.length > 1) {
+      searchHandler(searchInput);
+    }
+    return;
+  }, [searchInput]);
+
+  const searchHandler = async (q: string) => {
+    const { data } = await ShopAPI.search({ q: searchInput, distance: 500 });
+    dispatch(setMarkers(data));
+    console.log(data);
+  };
 
   return (
     <LayoutStyled>
       {/* 이벤트 리스너는 StoreCard 에 다 만들고, */}
       {/* 이벤트 핸들러는 StoreCard 를 사용 하는 StoreList 가 제어하는것이 더 독립적이다. */}
-      {Markers.map((item) => (
-        <StoreCard
-          onClick={() => handleOnClick(item._id)}
-          key={item._id}
-          shopName={item.CMPNM_NM}
-          address={item.REFINE_LOTNO_ADDR}
-          telNo={item.TELNO}
-          latMarker={item.REFINE_WGS84_LAT}
-          lngMarker={item.REFINE_WGS84_LOGT}
-        />
-      ))}
+      {Markers === null && searchInput.length === 0 && (
+        <div style={{ padding: 20, textAlign: "center" }}>
+          검색결과가 없습니다.
+        </div>
+      )}
+      {Markers === null
+        ? null
+        : Markers.map((item: any) => (
+            <StoreCard
+              onClick={() => handleOnClick(item._id)}
+              key={item._id}
+              shopName={item.CMPNM_NM}
+              address={item.REFINE_LOTNO_ADDR}
+              telNo={item.TELNO}
+              latMarker={item.REFINE_WGS84_LAT}
+              lngMarker={item.REFINE_WGS84_LOGT}
+            />
+          ))}
     </LayoutStyled>
   );
 };
@@ -57,7 +86,7 @@ const LayoutStyled = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  height: 220px;
+  height: 252px;
   padding: 2%;
 
   ${media.small} {

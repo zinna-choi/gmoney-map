@@ -129,7 +129,7 @@ const LocaButton = styled(RoundButton)`
   font-weight: 300;
   svg {
     margin-left: 5px;
-    vertical-align: text-top;
+    vertical-align: middle;
   }
 `;
 const Current = styled.div`

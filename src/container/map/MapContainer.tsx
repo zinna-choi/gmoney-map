@@ -198,11 +198,12 @@ const MapContainer: React.FC<Props> = (props) => {
 
 const Container = styled.div`
   background-color: #ffffff;
-  width: 100%;
+  width: calc(100% - 380px);
   height: 100vh;
   box-sizing: border-box;
   position: relative;
   flex: 1;
+  left: 380px;
 `;
 
 const MaskComponentStyled = styled.div`

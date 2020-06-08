@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import styled from "styled-components";
 import Header from "../../components/layouts/Header";
 // import Location from "../maps/Location";
@@ -12,9 +12,15 @@ import { withRouter, useRouter } from "next/router";
 import Link from "../../lib/utility/ActiveLink";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
-import { setLocation, setMapCenter } from "../../slices/store-slice";
+import {
+  setLocation,
+  setMapCenter,
+  setSearchInput,
+} from "../../slices/store-slice";
 import KakaoMapContext from "../../components/maps/KakaoMapContext";
 import dynamic from "next/dynamic";
+import ShopAPI from "../../api/ShopAPI";
+import { IMapsBasicInfo } from "../../components/maps/KakaoMap";
 
 declare const kakao: any;
 const Location = dynamic(() => import("../../components/maps/Location"), {
@@ -23,12 +29,13 @@ const Location = dynamic(() => import("../../components/maps/Location"), {
 
 export type Props = {
   onRender?: any;
+  text?: any;
 };
 
 const Side: React.FC<Props> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { Markers, currentMarker, mapCenter } = useSelector(
+  const { Markers, currentMarker, mapCenter, searchInput } = useSelector(
     (state: RootState) => state.store
   );
   const map = useContext(KakaoMapContext);
@@ -36,6 +43,19 @@ const Side: React.FC<Props> = () => {
   useEffect(() => {
     dispatch(setMapCenter(mapCenter));
   }, [mapCenter]);
+
+  //상호명 검색 기능
+
+  //const [searchInput, setSearchInput] = useState<string>("");
+
+  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchInput(e.currentTarget.value));
+    console.log("search >", searchInput);
+  };
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+  };
 
   console.log("current marker >", currentMarker);
   console.log("mapcenterr >", mapCenter);
@@ -46,7 +66,11 @@ const Side: React.FC<Props> = () => {
         {mapCenter && (
           <Location lat={mapCenter.latitude} lng={mapCenter.longitude} />
         )}
-        <SearchBox />
+        <SearchBox
+          onChange={handleSearch}
+          onSubmit={handleSubmit}
+          text={searchInput}
+        />
       </Content>
       <hr />
       <Content>

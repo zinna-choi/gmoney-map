@@ -8,6 +8,12 @@ import {
 import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 import { OutlinedInputProps } from "@material-ui/core/OutlinedInput";
 
+export type props = {
+  text?: any;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit?: (e: any) => void;
+};
+
 const useStylesReddit = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -54,18 +60,19 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function SearchBox() {
+export default function SearchBox(props: props) {
   const classes = useStyles();
 
   return (
-    <form className={classes.root} noValidate>
+    <form className={classes.root} noValidate onKeyPress={props.onSubmit}>
       <RedditTextField
-        label="GMONEYSTORE"
+        label="상호명을 입력하세요"
         className={classes.margin}
-        defaultValue="상호명을 입력하세요."
         variant="filled"
         id="reddit-input"
         fullWidth
+        value={props.text}
+        onChange={props.onChange}
       />
     </form>
   );

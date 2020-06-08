@@ -13,6 +13,7 @@ export type StoreState = {
     latitude: number;
     longitude: number;
   };
+  searchInput?: any;
 };
 const initialState: StoreState = {
   ShopPpoStore: false,
@@ -27,6 +28,7 @@ const initialState: StoreState = {
     latitude: 37.2750552,
     longitude: 127.0072561,
   },
+  searchInput: "",
 };
 
 const storeSlice = createSlice({
@@ -45,6 +47,9 @@ const storeSlice = createSlice({
     setMapCenter(state, action: PayloadAction<any>) {
       state.mapCenter = action.payload;
     },
+    setSearchInput(state, action: PayloadAction<any>) {
+      state.searchInput = action.payload;
+    },
   },
 });
 
@@ -54,4 +59,5 @@ export const {
   setMarkers,
   setLocation,
   setMapCenter,
+  setSearchInput,
 } = storeSlice.actions;

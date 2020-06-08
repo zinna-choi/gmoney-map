@@ -153,7 +153,7 @@ const KakaoMap: React.SFC<MapContainProps> = (props) => {
 
   return (
     <Layout>
-      <div id="dmap" style={{ width: "100vw", height: "100vh" }}>
+      <div id="dmap" style={{ width: "100%", height: "100vh" }}>
         {Loader}
       </div>
 
@@ -167,5 +167,6 @@ const Layout = styled.div`
   height: 100%;
   position: absolute;
   z-index: 0;
+  top: 0;
 `;
 export default KakaoMap;
