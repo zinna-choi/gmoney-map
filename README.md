@@ -1,6 +1,6 @@
 # 경기도 지역화폐 가맹점 찾기
 
-![gmoney_intro](./images/gmoney_intro.jpg)
+![gmoney_intro](./public/images/gmoney_intro.jpg)
 
 ## 개요
 
