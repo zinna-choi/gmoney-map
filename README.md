@@ -1,5 +1,7 @@
 # 경기도 지역화폐 가맹점 찾기
 
+![gmoney_intro](./public/images/gmoney_intro.jpg)
+
 ## 개요
 
 g-money-map은 경기도 지역화폐 가맹점을 사용자의 위치 및 지도의 중심위치 기반으로 지도위에 표시해주는 애플리케이션 입니다.
@@ -94,3 +96,7 @@ $ vercel --prod
 지머니 애플리케이션은, 경기도 지역화폐 API 에서 데이터를 다운받아, 애플리케이션 고유의 MongoDB 로 관리합니다.
 
 이 사유는, 데이터 제공자 (경기도 지역화폐 API)에서 제공 하는 데이터를 더 효율적으로 가공하기 위함입니다.
+
+## 프로젝트 관리 (JIRA)
+
+[JIRA_GMoneyMap](https://id.atlassian.com/invite/p/jira-software?id=ZmapBb96QzaglAoL9nsmeQ)
