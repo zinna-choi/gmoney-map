@@ -57,8 +57,6 @@ const Side: React.FC<Props> = () => {
     e.preventDefault();
   };
 
-  console.log("current marker >", currentMarker);
-  console.log("mapcenterr >", mapCenter);
   return (
     <LayoutStyled>
       <Header />
@@ -79,7 +77,10 @@ const Side: React.FC<Props> = () => {
         </div>
         <FranLayout>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "1" } }}>
+            <Link
+              activeClassName="active"
+              href={{ query: { category: ["음식"].join(",") } }}
+            >
               <a className="btn_con">
                 <CircleButton>
                   <FaHamburger size="20" color="#fff" />
@@ -89,7 +90,10 @@ const Side: React.FC<Props> = () => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "2" } }}>
+            <Link
+              activeClassName="active"
+              href={{ query: { category: ["카페", "음료"].join(",") } }}
+            >
               <a className="btn_con">
                 <CircleButton>
                   <IoMdCafe size="20" color="#fff" />
@@ -99,7 +103,10 @@ const Side: React.FC<Props> = () => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "3" } }}>
+            <Link
+              activeClassName="active"
+              href={{ query: { category: "etc" } }}
+            >
               <a className="btn_con">
                 <CircleButton>
                   <FaStore size="20" color="#fff" />
@@ -109,7 +116,14 @@ const Side: React.FC<Props> = () => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "4" } }}>
+            <Link
+              activeClassName="active"
+              href={{
+                query: {
+                  category: ["유통", "도매", "소매", "신변", "잡화"].join(","),
+                },
+              }}
+            >
               <a className="btn_con">
                 <CircleButton>
                   <MdShoppingBasket size="20" color="#fff" />
@@ -119,7 +133,14 @@ const Side: React.FC<Props> = () => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "5" } }}>
+            <Link
+              activeClassName="active"
+              href={{
+                query: {
+                  category: ["병원", "기타의료기관", "의원", "약국"].join(","),
+                },
+              }}
+            >
               <a className="btn_con">
                 <CircleButton>
                   <IoIosMedkit size="20" color="#fff" />
@@ -129,7 +150,23 @@ const Side: React.FC<Props> = () => {
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link activeClassName="active" href={{ query: { cate: "6" } }}>
+            <Link
+              activeClassName="active"
+              href={{
+                query: {
+                  category: [
+                    "레저업소",
+                    "레저용품",
+                    "문화",
+                    "취미",
+                    "숙박업",
+                    "학원",
+                    "여행",
+                    "회원제형태",
+                  ].join(","),
+                },
+              }}
+            >
               <a className="btn_con">
                 <CircleButton>
                   <MdMovieCreation size="20" color="#fff" />

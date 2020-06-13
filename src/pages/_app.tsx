@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import store from "../module";
 import "../MarkerStyle.scss";
+import Axios from "axios";
 
 function MyApp({ Component, pageProps }: any) {
   useEffect(() => {

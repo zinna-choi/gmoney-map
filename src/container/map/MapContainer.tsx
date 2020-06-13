@@ -70,15 +70,21 @@ const MapContainer: React.FC<Props> = (props) => {
    */
   const [mapZoom, setMapZoom] = useState<number>(3);
 
+  const [center, setCenter] = useState({
+    lat: 37.2750552,
+    lng: 127.0072561,
+  });
+
   const handleLocationChange = (map: IMapsBasicInfo) => {
     const lat = Number(map.latitude),
       lng = Number(map.longitude),
       zoom = map.zoom;
 
-    /**
-     * 현재 위/경도 좌표 기준으로, 상점 리스틀 받아옵니다.
-     */
-    findByMapNearShop(lat, lng);
+    setCenter({
+      lat: lat,
+      lng: lng,
+    });
+    // findByMapNearShop(lat, lng, category);
   };
 
   /**
@@ -90,6 +96,19 @@ const MapContainer: React.FC<Props> = (props) => {
       longitude: lng,
     });
   };
+
+  useEffect(() => {
+    /**
+     * 현재 위/경도 좌표 기준으로, 상점 리스틀 받아옵니다.
+     */
+    if (!!center && center.lat && center.lng) {
+      findByMapNearShop(
+        center.lat,
+        center.lng,
+        router.query.category as string
+      );
+    }
+  }, [center.lat, center.lng, router.query.category]);
 
   // 좌표로 주소받는 라이브러리 goecoder
 
@@ -132,12 +151,23 @@ const MapContainer: React.FC<Props> = (props) => {
   //   dispatch(setLocation(currentMarker));
   // }, [currentMarker]);
 
-  const findByMapNearShop = async (lat: number, lng: number) => {
+  useEffect(() => {}, [router.query]);
+
+  const findByMapNearShop = async (
+    lat: number,
+    lng: number,
+    category?: string
+  ) => {
     try {
       setLoading(true);
 
       // 데이터를 로딩하고 있다는 표시
-      const { data } = await ShopAPI.search({ lat, lng, distance: 500 });
+      const { data } = await ShopAPI.search({
+        lat,
+        lng,
+        distance: 500,
+        category,
+      });
       dispatch(setMarkers(data));
     } finally {
       setLoading(false);

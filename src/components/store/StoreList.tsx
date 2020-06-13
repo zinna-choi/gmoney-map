@@ -1,4 +1,4 @@
-import React, { useEffect, ReactNode, useState } from "react";
+import React, { useEffect, ReactNode, useState, useContext } from "react";
 import StoreCard from "./StoreCard";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../module";
@@ -12,6 +12,7 @@ import styled from "styled-components";
 import media from "../../lib/styles/media";
 import { StoreInfoProps } from "./StoreInfo";
 import ShopAPI from "../../api/ShopAPI";
+import KakaoMapContext from "../maps/KakaoMapContext";
 
 export type StoreListProps = StoreInfoProps & {
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) &
@@ -24,7 +25,7 @@ export type StoreListProps = StoreInfoProps & {
 
 const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
   const dispatch = useDispatch();
-  const { shopStore, Markers, searchInput } = useSelector(
+  const { shopStore, Markers, searchInput, mapCenter } = useSelector(
     (state: RootState) => state.store
   );
 

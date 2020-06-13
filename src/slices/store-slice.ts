@@ -44,7 +44,10 @@ const storeSlice = createSlice({
     setLocation(state, action: PayloadAction<any>) {
       state.currentMarker = action.payload;
     },
-    setMapCenter(state, action: PayloadAction<any>) {
+    setMapCenter(
+      state,
+      action: PayloadAction<{ latitude: number; longitude: number }>
+    ) {
       state.mapCenter = action.payload;
     },
     setSearchInput(state, action: PayloadAction<any>) {
