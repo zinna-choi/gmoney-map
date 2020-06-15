@@ -22,7 +22,13 @@ const StoreCard: React.FC<Props> = (props) => {
 
 const LayoutStyled = styled.div`
   display: flex;
-  margin-bottom: 1rem;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 6% 4%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e3e3e380;
+  }
 `;
 
 const Info = styled(StoreInfo)`

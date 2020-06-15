@@ -77,28 +77,25 @@ const Side: React.FC<Props> = () => {
         </div>
         <FranLayout>
           <Tab className={router.pathname == "/" ? "active" : ""}>
-            <Link
-              activeClassName="active"
-              href={{ query: { category: ["음식"].join(",") } }}
-            >
+            <Link activeClassName="active" href={{ query: { category: "" } }}>
               <a className="btn_con">
                 <CircleButton>
                   <FaHamburger size="20" color="#fff" />
                 </CircleButton>
-                <p>음식점</p>
+                <p>전체</p>
               </a>
             </Link>
           </Tab>
           <Tab className={router.pathname == "/" ? "active" : ""}>
             <Link
               activeClassName="active"
-              href={{ query: { category: ["카페", "음료"].join(",") } }}
+              href={{ query: { category: ["음식", "카페", "음료"].join(",") } }}
             >
               <a className="btn_con">
                 <CircleButton>
-                  <IoMdCafe size="20" color="#fff" />
+                  <FaHamburger size="20" color="#fff" />
                 </CircleButton>
-                <p>카페</p>
+                <p>음식점/카페</p>
               </a>
             </Link>
           </Tab>
@@ -120,7 +117,14 @@ const Side: React.FC<Props> = () => {
               activeClassName="active"
               href={{
                 query: {
-                  category: ["유통", "도매", "소매", "신변", "잡화"].join(","),
+                  category: [
+                    "유통",
+                    "도매",
+                    "소매",
+                    "신변",
+                    "잡화",
+                    "정육점",
+                  ].join(","),
                 },
               }}
             >
@@ -220,6 +224,7 @@ const Content = styled.div`
     text-align: left;
     font-size: 0.8rem;
     color: #cecece;
+    padding-left: 3%;
     span {
       color: #10b592;
       font-weight: bold;
@@ -228,6 +233,7 @@ const Content = styled.div`
 `;
 
 const ListContent = styled(Content)`
+  padding: 0;
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;

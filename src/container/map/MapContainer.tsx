@@ -201,10 +201,28 @@ const MapContainer: React.FC<Props> = (props) => {
             shopName={marker.CMPNM_NM}
             address={marker.REFINE_LOTNO_ADDR}
             address_R={marker.REFINE_ROADNM_ADDR}
-            telNo={marker.TELNO}
+            telNo={
+              marker.TELNO === null ? "전화번호 미제공 업체" : marker.TELNO
+            }
             onAbMarkerClose={() => marker._id}
             latMarker={marker.REFINE_WGS84_LAT}
             lngMarker={marker.REFINE_WGS84_LOGT}
+            induty={marker.INDUTYPE_NM}
+            use_br={
+              marker.BRNHSTRM_MNY_USE_POSBL_YN === null
+                ? ""
+                : marker.BRNHSTRM_MNY_USE_POSBL_YN
+            }
+            use_ca={
+              marker.CARD_MNY_USE_POSBL_YN === null
+                ? ""
+                : marker.CARD_MNY_USE_POSBL_YN
+            }
+            use_m={
+              marker.MOBILE_MNY_USE_POSBL_YN === null
+                ? ""
+                : marker.MOBILE_MNY_USE_POSBL_YN
+            }
           />
         ))}
         {/* 현재 내위치의 마커 */}

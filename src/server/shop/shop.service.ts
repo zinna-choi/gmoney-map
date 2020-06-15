@@ -107,7 +107,7 @@ export const findAll = async (params: ISearchParams) => {
     });
   }
 
-  return shopModel.aggregate<IShopDocument>(aggregate);
+  return shopModel.aggregate<IShopDocument>(aggregate).allowDiskUse(true);
 };
 
 const getCategory = async () => {

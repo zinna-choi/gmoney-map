@@ -13,7 +13,7 @@ export type StoreState = {
     latitude: number;
     longitude: number;
   };
-  searchInput?: any;
+  searchInput?: string;
 };
 const initialState: StoreState = {
   ShopPpoStore: false,
@@ -50,7 +50,7 @@ const storeSlice = createSlice({
     ) {
       state.mapCenter = action.payload;
     },
-    setSearchInput(state, action: PayloadAction<any>) {
+    setSearchInput(state, action: PayloadAction<string>) {
       state.searchInput = action.payload;
     },
   },

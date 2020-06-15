@@ -78,6 +78,12 @@ const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
               telNo={item.TELNO}
               latMarker={item.REFINE_WGS84_LAT}
               lngMarker={item.REFINE_WGS84_LOGT}
+              use={[
+                item.BRNHSTRM_MNY_USE_POSBL_YN,
+                item.CARD_MNY_USE_POSBL_YN,
+                item.MOBILE_MNY_USE_POSBL_YN,
+              ]}
+              induty={item.INDUTYPE_NM}
             />
           ))}
     </LayoutStyled>
@@ -88,7 +94,6 @@ const LayoutStyled = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  padding: 2%;
   ${media.small} {
     z-index: 200;
   }

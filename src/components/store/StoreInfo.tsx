@@ -9,6 +9,8 @@ export type StoreInfoProps = {
   children?: ReactNode;
   latMarker?: string;
   lngMarker?: string;
+  use?: string[];
+  induty?: string;
 };
 
 const StoreInfo: React.FC<StoreInfoProps> = (props) => {
@@ -19,9 +21,9 @@ const StoreInfo: React.FC<StoreInfoProps> = (props) => {
           <div className="name">{props.shopName}</div>
           <div className="adress">{props.address}</div>
           <div className="tel">{props.telNo}</div>
-          <div className="use">지류형/카드형/모바일형</div>
+          <div className="use">{props.use}</div>
         </div>
-        <div className="type">카페</div>
+        {/* <div className="type">{props.induty}</div> */}
       </LayoutStyled>
     </>
   );
@@ -31,11 +33,11 @@ const LayoutStyled = styled.div`
   display: flex;
   width: 100%;
   font-size: 0.8rem;
-  color: #bababa;
+  color: #70757a;
   justify-content: space-between;
   .detail {
-    width: 86%;
-    margin: 0% 3%;
+    width: 100%;
+    margin-left: 3%;
     display: inline-block;
     .name {
       font-size: 0.98rem;
