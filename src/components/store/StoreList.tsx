@@ -52,9 +52,10 @@ const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
   }, [searchInput]);
 
   const searchHandler = async (q: string) => {
-    const { data } = await ShopAPI.search({ q: searchInput, distance: 500 });
+    const { data } = await ShopAPI.search({
+      q,
+    });
     dispatch(setMarkers(data));
-    console.log(data);
   };
 
   return (
@@ -84,8 +85,6 @@ const StoreList: React.FC<StoreListProps> = (props: StoreListProps) => {
 };
 
 const LayoutStyled = styled.div`
-  position: absolute;
-  top: 40px;
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;

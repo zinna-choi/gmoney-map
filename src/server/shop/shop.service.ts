@@ -98,9 +98,11 @@ export const findAll = async (params: ISearchParams) => {
 
   if (!!params.q) {
     aggregate.push({
-      CMPNM_NM: {
-        $regex: params.q,
-        $options: "i",
+      $match: {
+        CMPNM_NM: {
+          $regex: params.q,
+          $options: "i",
+        },
       },
     });
   }

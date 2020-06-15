@@ -39,7 +39,7 @@
     "typesafe-actions": "^4.4.2"
   },
   "scripts": {
-    "dev": "nodemon",
+    "dev": "next",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/server/index.js",
     "test": "jest --watch",
