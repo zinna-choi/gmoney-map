@@ -38,16 +38,33 @@ class MyDocument extends Document<any> {
     }
   }
 
+  setGoogleTags() {
+    return {
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-169339134-1');
+      `,
+    };
+  }
+
   render() {
     return (
       <Html>
         <Head>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-169339134-1"
+          />
+          <script dangerouslySetInnerHTML={this.setGoogleTags()} />
+
           <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
           <script
             type="text/javascript"
             src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_REST_KEY}&libraries=services`}
           ></script>
-          <title>경기도지역화폐 / 재난기본소득 가맹점 맵</title>
+          <title>경기지역화폐 / 재난기본소득 가맹점 맵</title>
           <meta
             name="description"
             content="경기도지역화폐 (gmoney) , 경기도 재난기본소득을 사용할 수 있는 음식점, 카페, 마트, 편의점, 생활편의, 문화시설 등의 사용처(가맹점)를 나의 위치 기반으로 조회할 수 있는 홈페이지 / 가평군, 고양시, 과천시, 광주시, 구리시, 군포시, 남양주시, 동두천시, 부천시, 수원시, 안산시, 안성시, 안양시, 양주시, 양평군, 여주시, 연천군, 오산시, 용인시, 의왕시, 의정부시, 이천시, 파주시, 평택시, 포천시, 하남시, 화성시 재난기본소득 조회
