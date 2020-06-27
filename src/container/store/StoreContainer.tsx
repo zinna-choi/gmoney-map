@@ -23,7 +23,7 @@ import ShopAPI from "../../api/ShopAPI";
 import { IMapsBasicInfo } from "../../components/maps/KakaoMap";
 
 declare const kakao: any;
-const Location = dynamic(() => import("../../components/maps/Location"), {
+const MapLocation = dynamic(() => import("../../components/maps/MapLocation"), {
   ssr: false,
 });
 
@@ -62,7 +62,7 @@ const Side: React.FC<Props> = () => {
       <Header />
       <Content>
         {mapCenter && (
-          <Location lat={mapCenter.latitude} lng={mapCenter.longitude} />
+          <MapLocation lat={mapCenter.latitude} lng={mapCenter.longitude} />
         )}
         <SearchBox
           onChange={handleSearch}

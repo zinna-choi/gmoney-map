@@ -3,9 +3,11 @@ import KakaoMapContext from "../components/maps/KakaoMapContext";
 import { withRouter } from "next/router";
 import MapContainer from "./map/MapContainer";
 import StoreContainer from "./store/StoreContainer";
+import MobileContainer from "./store/MobileContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../module";
 import { setMarkers, setPopStatus } from "../slices/store-slice";
+import MobileSubMenu from "../components/layouts/MobileSubMenu";
 
 type MainContainProps = {
   onRender?: any;
@@ -42,6 +44,7 @@ export const Main: React.SFC<MainContainProps> = (props) => {
     <KakaoMapContext.Provider value={map}>
       <MapContainer onRender={setMap} />
       <StoreContainer />
+      <MobileContainer />
     </KakaoMapContext.Provider>
   );
 };

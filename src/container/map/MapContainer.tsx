@@ -24,8 +24,9 @@ import {
 } from "../../slices/store-slice";
 import AbMarker from "../../components/maps/AbMarker";
 import KakaoAPI from "../../api/KakaoAPI";
-import Location from "../../components/maps/Location";
+import Location from "../../components/maps/MapLocation";
 import { RingLoader } from "react-spinners";
+import media from "../../lib/styles/media";
 
 export declare const kakao: any;
 
@@ -252,6 +253,12 @@ const Container = styled.div`
   position: relative;
   flex: 1;
   left: 380px;
+  ${media.small} {
+    width: 100%;
+    left: 0;
+    top: 185px;
+    height: calc(100vh - 185px);
+  }
 `;
 
 const MaskComponentStyled = styled.div`

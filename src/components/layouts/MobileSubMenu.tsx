@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import Location from "../location/Location";
 import media from "../../lib/styles/media";
 import { IoMdCafe, IoIosMedkit } from "react-icons/io";
 import { MdShoppingBasket, MdMovieCreation } from "react-icons/md";
@@ -8,6 +7,14 @@ import { FaStore, FaHamburger } from "react-icons/fa";
 import { withRouter, useRouter } from "next/router";
 import e from "express";
 import Link from "../../lib/utility/ActiveLink";
+import dynamic from "next/dynamic";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../module";
+import { setMapCenter, setSearchInput } from "../../slices/store-slice";
+
+const MapLocation = dynamic(() => import("../maps/MapLocation"), {
+  ssr: false,
+});
 
 export type Props = {
   onClick?: () => void;
@@ -16,6 +23,12 @@ export type Props = {
 
 const MobileSubMenu: React.FC<Props> = (porps) => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { mapCenter } = useSelector((state: RootState) => state.store);
+  useEffect(() => {
+    dispatch(setMapCenter(mapCenter));
+  }, [mapCenter]);
+
   const { cate } = router.query; // query 에서 a 가 key 인것을 가져옴
   const handleClick = (e: any) => {
     // e.currentTarget.style.background =
@@ -24,22 +37,18 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
 
   return (
     <LayoutStyled>
-      <div className="loca-info">
-        <Location />
-      </div>
-      <hr></hr>
       <Content>
         <FranLayout>
           <Tab className={router.pathname == "/" ? "active" : ""}>
             <Link
               activeClassName="active"
               active={!cate || cate === "1"}
-              href={{ query: { cate: "1" } }}
+              href={{ query: { category: "" } }}
             >
               <a className="btn_con">
-                <CircleButton onClick={handleClick}>
-                  <FaHamburger size="20" color="#fff" />
-                  <p>음식점</p>
+                <CircleButton>
+                  <FaHamburger size="15" color="#fff" />
+                  <p>전체</p>
                 </CircleButton>
               </a>
             </Link>
@@ -48,12 +57,12 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
             <Link
               activeClassName="active"
               active={cate === "2"}
-              href={{ query: { cate: "2" } }}
+              href={{ query: { category: ["음식", "카페", "음료"].join(",") } }}
             >
               <a className="btn_con">
-                <CircleButton onClick={handleClick}>
-                  <IoMdCafe size="20" color="#fff" />
-                  <p>카페</p>
+                <CircleButton>
+                  <FaHamburger size="15" color="#fff" />
+                  <p>음식점/카페</p>
                 </CircleButton>
               </a>
             </Link>
@@ -62,11 +71,11 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
             <Link
               activeClassName="active"
               active={cate === "3"}
-              href={{ query: { cate: "3" } }}
+              href={{ query: { category: "etc" } }}
             >
               <a className="btn_con">
-                <CircleButton onClick={handleClick}>
-                  <FaStore size="20" color="#fff" />
+                <CircleButton>
+                  <FaStore size="15" color="#fff" />
                   <p>생활편의</p>
                 </CircleButton>
               </a>
@@ -76,11 +85,23 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
             <Link
               activeClassName="active"
               active={cate === "4"}
-              href={{ query: { cate: "4" } }}
+              href={{
+                query: {
+                  category: [
+                    "유통",
+                    "도매",
+                    "소매",
+                    "신변",
+                    "잡화",
+                    "정육점",
+                  ].join(","),
+                },
+              }}
             >
               <a className="btn_con">
-                <CircleButton onClick={handleClick}>
-                  <MdShoppingBasket size="20" color="#fff" /> <p>마트/편의점</p>
+                <CircleButton>
+                  <MdShoppingBasket size="15" color="#fff" />
+                  <p>마트/편의점</p>
                 </CircleButton>
               </a>
             </Link>
@@ -89,11 +110,16 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
             <Link
               activeClassName="active"
               active={cate === "5"}
-              href={{ query: { cate: "5" } }}
+              href={{
+                query: {
+                  category: ["병원", "기타의료기관", "의원", "약국"].join(","),
+                },
+              }}
             >
               <a className="btn_con">
-                <CircleButton onClick={handleClick}>
-                  <IoIosMedkit size="20" color="#fff" /> <p>병원/약국</p>
+                <CircleButton>
+                  <IoIosMedkit size="15" color="#fff" />
+                  <p>병원/약국</p>
                 </CircleButton>
               </a>
             </Link>
@@ -101,12 +127,25 @@ const MobileSubMenu: React.FC<Props> = (porps) => {
           <Tab className={router.pathname == "/" ? "active" : ""}>
             <Link
               activeClassName="active"
-              active={cate === "6"}
-              href={{ query: { cate: "6" } }}
+              href={{
+                query: {
+                  category: [
+                    "레저업소",
+                    "레저용품",
+                    "문화",
+                    "취미",
+                    "숙박업",
+                    "학원",
+                    "여행",
+                    "회원제형태",
+                  ].join(","),
+                },
+              }}
             >
               <a className="btn_con">
-                <CircleButton onClick={handleClick}>
-                  <MdMovieCreation size="20" color="#fff" /> <p>문화/교육</p>
+                <CircleButton>
+                  <MdMovieCreation size="15" color="#fff" />
+                  <p>문화/교육</p>
                 </CircleButton>
               </a>
             </Link>
@@ -123,8 +162,9 @@ const LayoutStyled = styled.div`
   display: none;
   position: absolute;
   z-index: 100;
-  top: 80px;
+  top: 132px;
   left: 0;
+  border-top: 1px solid #ccc;
   ${media.small} {
     display: block;
   }
@@ -134,7 +174,7 @@ const LayoutStyled = styled.div`
 `;
 const Content = styled.div`
   box-sizing: border-box;
-  padding: 1% 0 1% 1%;
+  padding: 2.5% 0 2.5% 1%;
   p {
     margin: 0 0 10px;
   }
@@ -169,12 +209,12 @@ const FranLayout = styled.div`
     margin: 0;
     font-size: 0.7rem;
     color: #fff;
-    font-weight: 600;
+    line-height: 1.4rem;
   }
 `;
 const CircleButton = styled.button`
   width: 90px;
-  height: 45px;
+  height: 40px;
   border-radius: 30px;
   background: #4e799e;
   border: none;
@@ -182,6 +222,11 @@ const CircleButton = styled.button`
   display: flex;
   justify-content: space-evenly;
   margin-right: 5px;
+  padding: 9%;
+
+  svg {
+    margin-top: 4%;
+  }
 `;
 
 const Tab = styled.div`

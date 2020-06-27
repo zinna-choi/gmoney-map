@@ -59,6 +59,12 @@ class MyDocument extends Document<any> {
           />
           <script dangerouslySetInnerHTML={this.setGoogleTags()} />
 
+          <script
+            data-ad-client="ca-pub-6722724584114603"
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          ></script>
+
           <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
           <script
             type="text/javascript"

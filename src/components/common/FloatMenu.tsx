@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import media from "../../lib/styles/media";
 
-type Props = {};
+type Props = {
+  count?: number;
+};
 
 const FloatMenu: React.FC<Props> = (props) => {
   const [state, setState] = useState({ visible: true });
@@ -14,7 +16,7 @@ const FloatMenu: React.FC<Props> = (props) => {
       <LayoutStyled>
         <Content>
           <div className="store">
-            주변음식점 <span>4</span> 개
+            내 주변 <span>{props.count}</span> 개
           </div>
           <div>|</div>
           <div onClick={handleClick}>리스트로보기 ></div>

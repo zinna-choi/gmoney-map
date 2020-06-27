@@ -6,6 +6,7 @@ import media from "../../lib/styles/media";
 export type Props = {
   visible?: boolean;
   onClick?: () => void;
+  count?: number;
 };
 
 const MobileStoreList: React.FC<Props> = (props) => {
@@ -20,7 +21,7 @@ const MobileStoreList: React.FC<Props> = (props) => {
         <LayoutStyled>
           <SubLayout>
             <div className="store">
-              주변음식점 <span>4</span> 개
+              내 주변 <span>{props.count}</span> 개
             </div>
             <div onClick={handleClick}>맵으로보기 ></div>
           </SubLayout>
@@ -35,9 +36,9 @@ const LayoutStyled = styled.div`
   width: 100%;
   position: absolute;
   z-index: 200;
-  height: 74%;
+  height: 71%;
   background-color: #fff;
-  top: 26%;
+  top: 29%;
   overflow-x: auto;
   overflow-y: hidden;
 `;
